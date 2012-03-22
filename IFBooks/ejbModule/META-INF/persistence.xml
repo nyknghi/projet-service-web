@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+  <persistence-unit name="SampleUnit" transaction-type="JTA">
+﻿  <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    
+    <jta-data-source>java:PostgresDS</jta-data-source>
+﻿ <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
+<properties>
+
+﻿  ﻿  <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+﻿  ﻿  <!-- <property name="hibernate.archive.autodetection" value="class, hbm"/>-->
+﻿  ﻿  <property name="hibernate.show_sql" value="true"/>
+﻿  ﻿  <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+﻿  ﻿  <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/IFBooks"/>
+﻿  ﻿  <property name="hibernate.connection.username" value="postgres"/>
+﻿  ﻿  <property name="hibernate.connection.password" value="admin"/>
+﻿  ﻿  <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+﻿  ﻿  <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
+
+</properties>
+﻿  
+﻿  
+﻿  </persistence-unit>
+</persistence>
