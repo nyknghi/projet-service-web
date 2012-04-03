@@ -14,4 +14,6 @@ public interface IGestionnaire extends Remote{
 	public Set<Livre> rechercherParTitre (String titre) throws RemoteException;
 	public Set<Livre> rechercherParAuteur (long idAuteur) throws RemoteException;
 	public boolean estDisponible(long idLivre) throws RemoteException;
+	
+	public Auteur rechercherAuteur(long idAuteur) throws RemoteException; 
 }

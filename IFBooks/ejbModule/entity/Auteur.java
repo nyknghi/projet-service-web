@@ -1,12 +1,15 @@
 package entity;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @Table(name="Auteur")
-public class Auteur {
+public class Auteur extends UnicastRemoteObject{
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idAuteur;
@@ -15,9 +18,9 @@ public class Auteur {
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="auteur")
 	private Set<Livre> livres = new HashSet<Livre>();
 	
-	public Auteur(){}
+	public Auteur() throws RemoteException{}
 	
-	public Auteur(String nom) {
+	public Auteur(String nom) throws RemoteException{
 		this.nom = nom;
 	}
 

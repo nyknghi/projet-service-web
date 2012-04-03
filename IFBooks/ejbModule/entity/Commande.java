@@ -1,12 +1,15 @@
 package entity;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
 @Table (name="Commande", uniqueConstraints=@UniqueConstraint(columnNames={"client_idclient","livre_idlivre"}))
-public class Commande {
+public class Commande extends UnicastRemoteObject {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long idCommande;
@@ -28,9 +31,9 @@ public class Commande {
 	@Column
 	private Etape etape;
 	
-	public Commande(){}
+	public Commande() throws RemoteException{}
 
-	public Commande(Client client, Livre livre, int quantite) {
+	public Commande(Client client, Livre livre, int quantite) throws RemoteException {
 		this.client = client;
 		this.livre = livre;
 		this.quantite = quantite;

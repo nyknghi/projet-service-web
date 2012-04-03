@@ -4,7 +4,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Set;
 
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -13,12 +12,11 @@ import entity.Auteur;
 import entity.Livre;
 import entity.SousCatalogue;
 
-@Stateless
 public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	@PersistenceContext
 	EntityManager em;
 	
-	protected Gestionnaire() throws RemoteException {
+	public Gestionnaire() throws RemoteException {
 		super();
 	}
 
@@ -27,6 +25,14 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	@Override
 	public void ajouterLivre(String titre, int nbDisponibles, double prix,
 			Auteur auteur, SousCatalogue catalogue) throws RemoteException {
+		/*Auteur a_res = em.find(Auteur.class, auteur.getIdAuteur());
+		if (a_res == null){
+			em.persist(auteur); 
+		}
+		SousCatalogue sc = em.find(SousCatalogue.class, catalogue.getIdCatalogue());
+		if (sc == null){
+			em.persist(sc);
+		}*/
 		Livre livre = new Livre(titre, nbDisponibles, prix, auteur, catalogue);
 		em.persist(livre);		
 	}
@@ -47,6 +53,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return (Set<Livre>) query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Livre> rechercherParAuteur(long idAuteur) throws RemoteException {
 		Auteur auteur = em.find(Auteur.class, idAuteur);
@@ -59,6 +66,11 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	public boolean estDisponible(long idLivre) throws RemoteException {
 		Livre livre = em.find(Livre.class, idLivre);
 		return !(livre.getNbDisponibles()==0);
+	}
+
+	@Override
+	public Auteur rechercherAuteur(long idAuteur) throws RemoteException {
+		return em.find(Auteur.class, idAuteur);
 	}
 	
 }
