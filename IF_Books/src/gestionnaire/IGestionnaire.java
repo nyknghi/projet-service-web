@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
 import facade.ClientFacade;
+import facade.CommandeFacade;
 import facade.LivreFacade;
 
 public interface IGestionnaire extends Remote{
@@ -17,7 +18,10 @@ public interface IGestionnaire extends Remote{
 	public Map<Long,LivreFacade> rechercherParAuteur (long idAuteur) throws RemoteException;
 	public boolean estDisponible(long idLivre) throws RemoteException; 
 	
-	public void ajouterCommande(long id, ClientFacade client, Map<Integer, LivreFacade> livres) throws RemoteException;
+	public ClientFacade ajouterClient (long idClient, String nom, String login, String mdp) throws RemoteException;
+	
+	public CommandeFacade ajouterCommande(long id, long idClient, Map<Integer, Long> livres) throws RemoteException;
+	public CommandeFacade rechercherCommande(long id) throws RemoteException;
 	
 	public ClientFacade rechercherClientParId(long idClient) throws RemoteException;
 	public boolean verifierFonds(long idClient, double montantAchat) throws RemoteException;

@@ -31,6 +31,10 @@ public class Client extends UnicastRemoteObject implements ClientFacade{
 		fonds += montant;
 	}
 	
+	public void payer(double montant){
+		fonds -= montant;
+	}
+	
 	public long getIdClient() {
 		return idClient;
 	}

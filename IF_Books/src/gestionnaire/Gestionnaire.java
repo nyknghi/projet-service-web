@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import facade.ClientFacade;
+import facade.CommandeFacade;
 import facade.LivreFacade;
 
 import pojo.Auteur;
@@ -99,13 +100,16 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public void ajouterCommande(long id, ClientFacade client, Map<Integer, LivreFacade> livres) throws RemoteException {
-		Commande commande = new Commande(id, (Client)client);
-		for(Entry <Integer, LivreFacade> entry : livres.entrySet()) {
-			Livre liv = (Livre)entry.getValue();
+	public CommandeFacade ajouterCommande(long id, long idClient, Map<Integer, Long> livres) throws RemoteException {
+		Client client = (Client) rechercherClientParId(idClient);
+		
+		Commande commande = new Commande(id, client);
+		for(Entry <Integer, Long> entry : livres.entrySet()) {
+			Livre liv = (Livre)rechercherParId(entry.getValue());
 			commande.ajouterLivreCommande(liv, entry.getKey());
 		}
-		store.ajouterCommande(commande);
+		store.addCommande(commande);
+		return commande;
 	}
 
 	@Override
@@ -116,13 +120,29 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 
 	@Override
 	public ClientFacade rechercherClientParId(long idClient) throws RemoteException {
-		Set<Client> clients = store.getAllClient();
-		for (Client c : clients){
+		for (Client c : store.getClients()){
 			if (c.getIdClient() == idClient){
-				return (ClientFacade) c;
+				return c;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public CommandeFacade rechercherCommande(long id) throws RemoteException {
+		for (Commande c : store.getCommandes()){
+			if (c.getIdCommande() == id){
+				return (CommandeFacade) c;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public ClientFacade ajouterClient(long idClient, String nom, String login, String mdp) throws RemoteException {
+		Client client = new Client(idClient, nom, login, mdp);
+		store.addClient(client);
+		return client;
 	}
 
 }

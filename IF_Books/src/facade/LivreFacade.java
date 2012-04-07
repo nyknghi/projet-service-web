@@ -16,4 +16,5 @@ public interface LivreFacade extends Remote{
 	public double getPrix() throws RemoteException;
 	public void setPrix(double prix) throws RemoteException;
 	public boolean isDisponible() throws RemoteException;
+	public String afficher() throws RemoteException;
 }

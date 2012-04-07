@@ -88,11 +88,8 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 		this.catalogue = catalogue;
 	}
 
-	@Override
-	public String toString() {
+	public String afficher() throws RemoteException {
 		return "Livre [idLivre=" + idLivre + ", titre=" + titre
-				+ ", datePublication=" + datePublication + ", nbDisponibles="
-				+ nbDisponibles + ", prix=" + prix + ", auteur=" + auteur
-				+ ", catalogue=" + catalogue + "]";
+				+ ", nbDisponibles="	+ nbDisponibles + ", prix=" + prix + "]";
 	}
 }

@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Commande extends UnicastRemoteObject {
+import facade.CommandeFacade;
+
+public class Commande extends UnicastRemoteObject implements CommandeFacade{
 	private static final long serialVersionUID = 1L;
 	private long idCommande;
 	private Client client;
@@ -92,4 +94,8 @@ public class Commande extends UnicastRemoteObject {
 	public void setLivres(Map<Integer, Livre> livres) {
 		this.livres = livres;
 	}	
+	
+	/*
+	 * TODO: Gestion des etapes
+	 */
 }

@@ -9,6 +9,7 @@ public class BookStore extends UnicastRemoteObject{
 	private static final long serialVersionUID = 1L;
 
 	private Set<Auteur> auteurs;
+	private Set<Client> clients;
 	private Set<Commande> commandes;
 	private Catalogue catalogue;
 	
@@ -17,6 +18,7 @@ public class BookStore extends UnicastRemoteObject{
 	public BookStore() throws RemoteException{
 		auteurs = new HashSet<Auteur>();
 		commandes = new HashSet<Commande>();
+		clients = new HashSet<Client>();
 		catalogue = Catalogue.getInstance();
 	}
 
@@ -34,13 +36,14 @@ public class BookStore extends UnicastRemoteObject{
 		return null;
 	}
 
-	public Set<Client> getAllClient(){
+	/*public Set<Client> getAllClient(){
 		Set<Client> res = new HashSet<Client>();
+		//System.out.println(commandes.size());
 		for (Commande c : commandes){
 			res.add(c.getClient());
 		}
 		return res;
-	}
+	}*/
 	
 	public Set<Auteur> getAuteurs() {
 		return auteurs;
@@ -50,7 +53,19 @@ public class BookStore extends UnicastRemoteObject{
 		this.auteurs = auteurs;
 	}
 
-	public void ajouterCommande(Commande c){
+	public void addClient(Client c){
+		this.clients.add(c);
+	}
+	
+	public Set<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(Set<Client> clients) {
+		this.clients = clients;
+	}
+
+	public void addCommande(Commande c){
 		this.commandes.add(c);
 	}
 	
