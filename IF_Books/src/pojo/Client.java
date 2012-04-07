@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Client extends UnicastRemoteObject{
+import facade.ClientFacade;
+
+public class Client extends UnicastRemoteObject implements ClientFacade{
 	private static final long serialVersionUID = 1L;
 	
 	private long idClient;
@@ -25,6 +27,10 @@ public class Client extends UnicastRemoteObject{
 		this.fonds = 5.0;
 	}
 
+	public void ajouterFonds(double montant){
+		fonds += montant;
+	}
+	
 	public long getIdClient() {
 		return idClient;
 	}

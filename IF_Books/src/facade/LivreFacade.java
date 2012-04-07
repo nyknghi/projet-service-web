@@ -4,9 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import pojo.Auteur;
-import pojo.SousCatalogue;
-
 public interface LivreFacade extends Remote{
 	public long getIdLivre() throws RemoteException;
 	public void setIdLivre(long idLivre) throws RemoteException;
@@ -18,8 +15,5 @@ public interface LivreFacade extends Remote{
 	public void setNbDisponibles(int nbDisponibles) throws RemoteException;
 	public double getPrix() throws RemoteException;
 	public void setPrix(double prix) throws RemoteException;
-	public Auteur getAuteur() throws RemoteException;
-	public void setAuteur(Auteur auteur) throws RemoteException;
-	public SousCatalogue getCatalogue() throws RemoteException;
-	public void setCatalogue(SousCatalogue catalogue) throws RemoteException;
+	public boolean isDisponible() throws RemoteException;
 }

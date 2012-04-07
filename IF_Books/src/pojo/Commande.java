@@ -12,6 +12,7 @@ public class Commande extends UnicastRemoteObject {
 	private long idCommande;
 	private Client client;
 	
+	// Livre et sa quantite
 	private Map<Integer, Livre> livres = new HashMap<Integer, Livre>();
 	
 	private double montant = 0.0;

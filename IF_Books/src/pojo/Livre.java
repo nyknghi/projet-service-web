@@ -27,6 +27,10 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 		this.catalogue = catalogue;
 		this.datePublication = new Date();
 	}
+	
+	public boolean isDisponible(){
+		return (nbDisponibles > 0);
+	}
 
 	public long getIdLivre() {
 		return idLivre;

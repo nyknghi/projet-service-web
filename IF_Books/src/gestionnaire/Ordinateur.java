@@ -1,21 +1,21 @@
 package gestionnaire;
 
-import java.net.MalformedURLException;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import facade.LivreFacade;
 
 public class Ordinateur {
 	public static void main(String[] args) {
 		try {
-			//Registry r = LocateRegistry.getRegistry();
+			Registry r = LocateRegistry.getRegistry();
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
 			
-			IGestionnaire gest = (IGestionnaire) Naming.lookup("rmi://localhost/GestionnaireServeur");
+			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");
 			
 			/*Auteur a = new Auteur(1, "AAA");
 			SousCatalogue eco_gest = new SousCatalogue(1, "Eco-Gestion");
@@ -41,8 +41,6 @@ public class Ordinateur {
 		}
 		catch (NotBoundException nbe){
 			System.out.println("java.rmi.NotBoundException" + nbe);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
 		}
 	}
 }

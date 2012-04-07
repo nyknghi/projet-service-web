@@ -33,6 +33,14 @@ public class BookStore extends UnicastRemoteObject{
 		}
 		return null;
 	}
+
+	public Set<Client> getAllClient(){
+		Set<Client> res = new HashSet<Client>();
+		for (Commande c : commandes){
+			res.add(c.getClient());
+		}
+		return res;
+	}
 	
 	public Set<Auteur> getAuteurs() {
 		return auteurs;
@@ -42,6 +50,10 @@ public class BookStore extends UnicastRemoteObject{
 		this.auteurs = auteurs;
 	}
 
+	public void ajouterCommande(Commande c){
+		this.commandes.add(c);
+	}
+	
 	public Set<Commande> getCommandes() {
 		return commandes;
 	}
