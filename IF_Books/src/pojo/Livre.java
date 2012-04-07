@@ -1,4 +1,4 @@
-
+package pojo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -81,5 +81,12 @@ public class Livre extends UnicastRemoteObject{
 	public void setCatalogue(SousCatalogue catalogue) {
 		this.catalogue = catalogue;
 	}
-		
+
+	@Override
+	public String toString() {
+		return "Livre [idLivre=" + idLivre + ", titre=" + titre
+				+ ", datePublication=" + datePublication + ", nbDisponibles="
+				+ nbDisponibles + ", prix=" + prix + ", auteur=" + auteur
+				+ ", catalogue=" + catalogue + "]";
+	}
 }

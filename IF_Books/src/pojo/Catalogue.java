@@ -1,4 +1,4 @@
-
+package pojo;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -28,6 +28,14 @@ public class Catalogue extends UnicastRemoteObject{
 		this.sous_cat.remove(sc);
 	}
 
+	public SousCatalogue findSousCatalogue(long idCat){
+		for (SousCatalogue sc : sous_cat){
+			if (sc.getIdCatalogue() == idCat)
+				return sc;
+		}
+		return null;
+	}
+	
 	public Set<SousCatalogue> getSous_cat() {
 		return sous_cat;
 	}
