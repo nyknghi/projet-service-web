@@ -8,11 +8,11 @@ import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.Map;
 
+import facade.LivreFacade;
 
+public class GesLivre {
 
-public class GesBooks {
-
-	public GesBooks() {	}
+	public GesLivre() {	}
 	static  IGestionnaire gest;
 	Map <Integer,Long> panier = new HashMap<Integer,Long>();
 
@@ -43,6 +43,14 @@ public class GesBooks {
 	}
 
 	public void ajouterLivrePanier(){
-		
+
 	}
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
