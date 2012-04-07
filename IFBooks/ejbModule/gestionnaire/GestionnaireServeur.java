@@ -1,6 +1,7 @@
 package gestionnaire;
 
 import java.rmi.RMISecurityManager;
+import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -14,8 +15,8 @@ public class GestionnaireServeur {
 			if (System.getSecurityManager() == null) 
 				System.setSecurityManager(new RMISecurityManager());
 						
-			gest = new Gestionnaire();
-			r.bind("rmi://localhost/GestionnaireServeur", gest);
+			gest = Gestionnaire.getInstance();
+			r.bind("rmi://localhost/GestionnaireServeur", (Remote) gest);
 			System.out.println("Server started !");
 		}
 		catch (Exception e) {

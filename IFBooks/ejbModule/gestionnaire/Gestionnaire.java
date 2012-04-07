@@ -2,37 +2,57 @@ package gestionnaire;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Set;
+import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import entity.Auteur;
 import entity.Livre;
 import entity.SousCatalogue;
 
 public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
+
+	private static final long serialVersionUID = 1L;
 	@PersistenceContext
 	EntityManager em;
 	
+	static Context ctx;
+	
+	private static Gestionnaire instance;
+	
 	public Gestionnaire() throws RemoteException {
 		super();
+		/*EntityManagerFactory emf = Persistence.createEntityManagerFactory("SampleUnit");
+	    em = emf.createEntityManager();
+	    createContext();*/
 	}
 
-	private static final long serialVersionUID = 1L;
-
+	public static Gestionnaire getInstance() throws RemoteException{
+		if (instance==null){
+			try {
+				ctx = new InitialContext();
+				ctx.addToEnvironment(InitialContext.INITIAL_CONTEXT_FACTORY,
+						"org.jnp.interfaces.NamingContextFactory");
+				ctx.addToEnvironment(InitialContext.URL_PKG_PREFIXES,
+						"org.jboss.naming:org.jnp.interfaces");
+				ctx.addToEnvironment(InitialContext.PROVIDER_URL,
+						"jnp://localhost:1099");
+				instance = (Gestionnaire) ctx.lookup("Gestionnaire/Remote");
+			} catch (NamingException e) {
+				e.printStackTrace();
+			}
+		} 
+		return instance;
+	}
+	
+/*
 	@Override
 	public void ajouterLivre(String titre, int nbDisponibles, double prix,
 			Auteur auteur, SousCatalogue catalogue) throws RemoteException {
-		/*Auteur a_res = em.find(Auteur.class, auteur.getIdAuteur());
-		if (a_res == null){
-			em.persist(auteur); 
-		}
-		SousCatalogue sc = em.find(SousCatalogue.class, catalogue.getIdCatalogue());
-		if (sc == null){
-			em.persist(sc);
-		}*/
 		Livre livre = new Livre(titre, nbDisponibles, prix, auteur, catalogue);
 		em.persist(livre);		
 	}
@@ -71,6 +91,46 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	@Override
 	public Auteur rechercherAuteur(long idAuteur) throws RemoteException {
 		return em.find(Auteur.class, idAuteur);
+	}
+*/
+	@Override
+	public void ajouterLivre(long id, String titre, int nbDisponibles,
+			double prix, Auteur auteur, SousCatalogue catalogue)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void supprimerLivre(Livre livre) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ajouterSousCatalogue(String intitule) throws RemoteException {
+		SousCatalogue sc = new SousCatalogue(intitule);
+		em.persist(sc);
+	}
+
+	@Override
+	public Map<Long, Livre> rechercherParTitre(String titre)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<Long, Livre> rechercherParAuteur(long idAuteur)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean estDisponible(long idLivre) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
