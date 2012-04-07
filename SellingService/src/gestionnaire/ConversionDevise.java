@@ -1,4 +1,4 @@
-package devise;
+package gestionnaire;
 
 import java.rmi.RemoteException;
 
