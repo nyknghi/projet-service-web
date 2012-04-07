@@ -1,14 +1,12 @@
 package gestionnaire;
 
-
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
-import pojo.Auteur;
-import pojo.SousCatalogue;
+import facade.LivreFacade;
 
 public class Ordinateur {
 	public static void main(String[] args) {
@@ -28,7 +26,13 @@ public class Ordinateur {
 			gest.ajouterAuteur(1, "AAA");
 			
 			gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1);
-			System.out.println(gest.rechercherParTitre("Finance"));
+			//LivreFacade livre =	(LivreFacade) gest.rechercherParTitre("Finance").get(0);
+			
+			//gest.rechercherParTitre("Finance");
+			LivreFacade livre = (LivreFacade) gest.rechercherParTitre("Finance").get(new Long(1));
+			
+			System.out.println(livre);
+			System.out.println(livre.getClass());
 			
 			System.out.println("End connection !");
 		}	

@@ -4,7 +4,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
-public class Livre extends UnicastRemoteObject{
+import facade.LivreFacade;
+
+public class Livre extends UnicastRemoteObject implements LivreFacade{
 	private static final long serialVersionUID = 1L;
 	private long idLivre;
 	private String titre;

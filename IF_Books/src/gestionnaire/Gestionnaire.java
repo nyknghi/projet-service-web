@@ -52,17 +52,18 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		livre.getAuteur().removeLivre(livre.getIdLivre());
 	}
 
+
 	@Override
 	public Map<Long, Livre> rechercherParTitre(String titre) throws RemoteException {
 		Map<Long, Livre> res = new HashMap<Long, Livre>();
-		Catalogue catalogue = Catalogue.getInstance();
+		Catalogue catalogue = store.getCatalogue();
 		Set<SousCatalogue> sousCat = catalogue.getSous_cat();
 		for (SousCatalogue sc : sousCat){
 			res.putAll(sc.getLivreByTitre(titre));
 		}
 		return res;
 	}
-
+	
 	@Override
 	public Map<Long, Livre> rechercherParAuteur(long idAuteur) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -82,6 +83,5 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		// TODO Auto-generated method stub
 		
 	}
-
 
 }

@@ -52,8 +52,10 @@ public class SousCatalogue extends UnicastRemoteObject{
 		Map<Long, Livre> res = new HashMap<Long, Livre>();
 		for(Entry <Long, Livre> entry : livres.entrySet()) {
 			Livre liv = entry.getValue();
-			if (liv.getTitre().contains(titre))
+			if (liv.getTitre().contains(titre)){
+				System.out.println("Herre!!!");
 				res.put(liv.getIdLivre(), liv);
+			}
 		}
 		return res;
 	}
