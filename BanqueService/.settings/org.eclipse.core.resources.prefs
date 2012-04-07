@@ -1,0 +1,9 @@
+#Sat Apr 07 15:11:27 CEST 2012
+eclipse.preferences.version=1
+encoding//src/FaultContracts/GOTLServices/_2008/_01/DefaultFaultContract.java=UTF-8
+encoding//src/net/restfulwebservices/www/DataContracts/_2008/_01/Currency.java=UTF-8
+encoding//src/net/restfulwebservices/www/DataContracts/_2008/_01/CurrencyCode.java=UTF-8
+encoding//src/net/restfulwebservices/www/ServiceContracts/_2008/_01/BasicHttpBinding_ICurrencyServiceStub.java=UTF-8
+encoding//src/net/restfulwebservices/www/ServiceContracts/_2008/_01/CurrencyService.java=UTF-8
+encoding//src/net/restfulwebservices/www/ServiceContracts/_2008/_01/CurrencyServiceLocator.java=UTF-8
+encoding//src/net/restfulwebservices/www/ServiceContracts/_2008/_01/ICurrencyService.java=UTF-8

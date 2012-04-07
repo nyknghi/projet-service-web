@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ConversionDeviseService WSDL service -->
+
+  <service name="ConversionDevise" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://devise"/>
+      <parameter name="wsdlServiceElement" value="ConversionDeviseService"/>
+      <parameter name="schemaQualified" value="http://devise"/>
+      <parameter name="wsdlServicePort" value="ConversionDevise"/>
+      <parameter name="className" value="devise.ConversionDevise"/>
+      <parameter name="wsdlPortType" value="ConversionDevise"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://devise" xmlns:retNS="http://devise" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="convertir" qname="operNS:convertir" returnQName="retNS:convertirReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://devise" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:source" type="tns:string"/>
+        <parameter xmlns:pns="http://devise" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:cible" type="tns:string"/>
+        <parameter xmlns:pns="http://devise" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:montant" type="tns:double"/>
+      </operation>
+      <parameter name="allowedMethods" value="convertir"/>
+
+  </service>
+</deployment>

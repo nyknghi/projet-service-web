@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://devise" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://devise" xmlns:intf="http://devise" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://devise" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="convertir">
+    <complexType>
+     <sequence>
+      <element name="source" type="xsd:string"/>
+      <element name="cible" type="xsd:string"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="convertirResponse">
+    <complexType>
+     <sequence>
+      <element name="convertirReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="convertirRequest">
+
+      <wsdl:part element="impl:convertir" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="convertirResponse">
+
+      <wsdl:part element="impl:convertirResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ConversionDevise">
+
+      <wsdl:operation name="convertir">
+
+         <wsdl:input message="impl:convertirRequest" name="convertirRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:convertirResponse" name="convertirResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ConversionDeviseSoapBinding" type="impl:ConversionDevise">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="convertir">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="convertirRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="convertirResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ConversionDeviseService">
+
+      <wsdl:port binding="impl:ConversionDeviseSoapBinding" name="ConversionDevise">
+
+         <wsdlsoap:address location="http://localhost:8080/BanqueService/services/ConversionDevise"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
