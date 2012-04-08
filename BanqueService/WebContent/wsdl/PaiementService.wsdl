@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://gestionnaire" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://gestionnaire" xmlns:intf="http://gestionnaire" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://gestionnaire" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="effectuerPaiement">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="idCommande" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="effectuerPaiementResponse">
+    <complexType/>
+   </element>
+   <element name="checkCommande">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="idCommande" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkCommandeResponse">
+    <complexType>
+     <sequence>
+      <element name="checkCommandeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isFondsDispo">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="isFondsDispoResponse">
+    <complexType>
+     <sequence>
+      <element name="isFondsDispoReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="effectuerPaiementRequest">
+
+      <wsdl:part element="impl:effectuerPaiement" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkCommandeResponse">
+
+      <wsdl:part element="impl:checkCommandeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkCommandeRequest">
+
+      <wsdl:part element="impl:checkCommande" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="effectuerPaiementResponse">
+
+      <wsdl:part element="impl:effectuerPaiementResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isFondsDispoResponse">
+
+      <wsdl:part element="impl:isFondsDispoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="isFondsDispoRequest">
+
+      <wsdl:part element="impl:isFondsDispo" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PaiementService">
+
+      <wsdl:operation name="effectuerPaiement">
+
+         <wsdl:input message="impl:effectuerPaiementRequest" name="effectuerPaiementRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:effectuerPaiementResponse" name="effectuerPaiementResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkCommande">
+
+         <wsdl:input message="impl:checkCommandeRequest" name="checkCommandeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:checkCommandeResponse" name="checkCommandeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isFondsDispo">
+
+         <wsdl:input message="impl:isFondsDispoRequest" name="isFondsDispoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:isFondsDispoResponse" name="isFondsDispoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PaiementServiceSoapBinding" type="impl:PaiementService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="effectuerPaiement">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="effectuerPaiementRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="effectuerPaiementResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="checkCommande">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkCommandeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkCommandeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="isFondsDispo">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="isFondsDispoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="isFondsDispoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PaiementServiceService">
+
+      <wsdl:port binding="impl:PaiementServiceSoapBinding" name="PaiementService">
+
+         <wsdlsoap:address location="http://localhost:8080/BanqueService/services/PaiementService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
