@@ -145,4 +145,19 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return client;
 	}
 
+	@Override
+	public long getLastKeyCommande() throws RemoteException {
+		return BookStore.getInstance().getCommandes().size() + 1;
+	}
+
+	@Override
+	public long getLastKeyClient() throws RemoteException {
+		return BookStore.getInstance().getClients().size() + 1;
+	}
+
+	@Override
+	public long getLastKeyAuteur() throws RemoteException {
+		return BookStore.getInstance().getAuteurs().size() + 1;
+	}
+
 }

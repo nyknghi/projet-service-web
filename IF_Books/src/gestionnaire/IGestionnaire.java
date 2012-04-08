@@ -25,5 +25,8 @@ public interface IGestionnaire extends Remote{
 	
 	public ClientFacade rechercherClientParId(long idClient) throws RemoteException;
 	public boolean verifierFonds(long idClient, double montantAchat) throws RemoteException;
+	public long getLastKeyCommande() throws RemoteException;
+	public long getLastKeyClient() throws RemoteException;
+	public long getLastKeyAuteur() throws RemoteException;
 	
 }
