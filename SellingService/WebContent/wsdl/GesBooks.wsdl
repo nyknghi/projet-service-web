@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://gestionnaire" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://gestionnaire" xmlns:intf="http://gestionnaire" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://gestionnaire" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="viderPanier">
+    <complexType/>
+   </element>
+   <element name="viderPanierResponse">
+    <complexType/>
+   </element>
+   <element name="prixDuLivre">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="prixDuLivreResponse">
+    <complexType>
+     <sequence>
+      <element name="prixDuLivreReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="effectuerPaiement">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="effectuerPaiementResponse">
+    <complexType>
+     <sequence>
+      <element name="effectuerPaiementReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterLivrePanier">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+      <element name="qteACommande" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterLivrePanierResponse">
+    <complexType/>
+   </element>
+   <element name="setDeviseEncours">
+    <complexType>
+     <sequence>
+      <element name="deviseEncours" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="setDeviseEncoursResponse">
+    <complexType/>
+   </element>
+   <element name="estDisponible">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="estDisponibleResponse">
+    <complexType>
+     <sequence>
+      <element name="estDisponibleReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDeviseEncours">
+    <complexType/>
+   </element>
+   <element name="getDeviseEncoursResponse">
+    <complexType>
+     <sequence>
+      <element name="getDeviseEncoursReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="suppLivreDansPanier">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="suppLivreDansPanierResponse">
+    <complexType/>
+   </element>
+   <element name="connecter">
+    <complexType/>
+   </element>
+   <element name="connecterResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="viderPanierResponse">
+
+      <wsdl:part element="impl:viderPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="estDisponibleResponse">
+
+      <wsdl:part element="impl:estDisponibleResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="prixDuLivreResponse">
+
+      <wsdl:part element="impl:prixDuLivreResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderPanierRequest">
+
+      <wsdl:part element="impl:viderPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="effectuerPaiementResponse">
+
+      <wsdl:part element="impl:effectuerPaiementResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDeviseEncoursResponse">
+
+      <wsdl:part element="impl:setDeviseEncoursResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="prixDuLivreRequest">
+
+      <wsdl:part element="impl:prixDuLivre" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterLivrePanierRequest">
+
+      <wsdl:part element="impl:ajouterLivrePanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="setDeviseEncoursRequest">
+
+      <wsdl:part element="impl:setDeviseEncours" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="connecterRequest">
+
+      <wsdl:part element="impl:connecter" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDeviseEncoursRequest">
+
+      <wsdl:part element="impl:getDeviseEncours" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDeviseEncoursResponse">
+
+      <wsdl:part element="impl:getDeviseEncoursResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="effectuerPaiementRequest">
+
+      <wsdl:part element="impl:effectuerPaiement" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="suppLivreDansPanierResponse">
+
+      <wsdl:part element="impl:suppLivreDansPanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterLivrePanierResponse">
+
+      <wsdl:part element="impl:ajouterLivrePanierResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="connecterResponse">
+
+      <wsdl:part element="impl:connecterResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="estDisponibleRequest">
+
+      <wsdl:part element="impl:estDisponible" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="suppLivreDansPanierRequest">
+
+      <wsdl:part element="impl:suppLivreDansPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="GesBooks">
+
+      <wsdl:operation name="viderPanier">
+
+         <wsdl:input message="impl:viderPanierRequest" name="viderPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:viderPanierResponse" name="viderPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="prixDuLivre">
+
+         <wsdl:input message="impl:prixDuLivreRequest" name="prixDuLivreRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:prixDuLivreResponse" name="prixDuLivreResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="effectuerPaiement">
+
+         <wsdl:input message="impl:effectuerPaiementRequest" name="effectuerPaiementRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:effectuerPaiementResponse" name="effectuerPaiementResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterLivrePanier">
+
+         <wsdl:input message="impl:ajouterLivrePanierRequest" name="ajouterLivrePanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajouterLivrePanierResponse" name="ajouterLivrePanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDeviseEncours">
+
+         <wsdl:input message="impl:setDeviseEncoursRequest" name="setDeviseEncoursRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setDeviseEncoursResponse" name="setDeviseEncoursResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="estDisponible">
+
+         <wsdl:input message="impl:estDisponibleRequest" name="estDisponibleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:estDisponibleResponse" name="estDisponibleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDeviseEncours">
+
+         <wsdl:input message="impl:getDeviseEncoursRequest" name="getDeviseEncoursRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDeviseEncoursResponse" name="getDeviseEncoursResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suppLivreDansPanier">
+
+         <wsdl:input message="impl:suppLivreDansPanierRequest" name="suppLivreDansPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:suppLivreDansPanierResponse" name="suppLivreDansPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connecter">
+
+         <wsdl:input message="impl:connecterRequest" name="connecterRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:connecterResponse" name="connecterResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="GesBooksSoapBinding" type="impl:GesBooks">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="viderPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="viderPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="viderPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="prixDuLivre">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="prixDuLivreRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="prixDuLivreResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="effectuerPaiement">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="effectuerPaiementRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="effectuerPaiementResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterLivrePanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajouterLivrePanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajouterLivrePanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDeviseEncours">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setDeviseEncoursRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setDeviseEncoursResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="estDisponible">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="estDisponibleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="estDisponibleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDeviseEncours">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDeviseEncoursRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDeviseEncoursResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suppLivreDansPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="suppLivreDansPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="suppLivreDansPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connecter">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="connecterRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="connecterResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="GesBooksService">
+
+      <wsdl:port binding="impl:GesBooksSoapBinding" name="GesBooks">
+
+         <wsdlsoap:address location="http://localhost:8080/SellingService/services/GesBooks"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

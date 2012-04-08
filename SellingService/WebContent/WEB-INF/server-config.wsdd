@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -22,6 +22,38 @@
  <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:service name="GesBooks" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="viderPanier" qname="ns1:viderPanier" soapAction="" xmlns:ns1="http://gestionnaire" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
+  <ns1:operation name="prixDuLivre" qname="ns2:prixDuLivre" returnQName="ns2:prixDuLivreReturn" returnType="xsd:double" soapAction="" xmlns:ns2="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:idLivre" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="effectuerPaiement" qname="ns3:effectuerPaiement" returnQName="ns3:effectuerPaiementReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:idClient" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="ajouterLivrePanier" qname="ns4:ajouterLivrePanier" soapAction="" xmlns:ns4="http://gestionnaire">
+   <ns1:parameter qname="ns4:idLivre" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:qteACommande" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="setDeviseEncours" qname="ns5:setDeviseEncours" soapAction="" xmlns:ns5="http://gestionnaire">
+   <ns1:parameter qname="ns5:deviseEncours" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="estDisponible" qname="ns6:estDisponible" returnQName="ns6:estDisponibleReturn" returnType="xsd:boolean" soapAction="" xmlns:ns6="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns6:idLivre" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:operation name="getDeviseEncours" qname="ns7:getDeviseEncours" returnQName="ns7:getDeviseEncoursReturn" returnType="xsd:string" soapAction="" xmlns:ns7="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="suppLivreDansPanier" qname="ns8:suppLivreDansPanier" soapAction="" xmlns:ns8="http://gestionnaire">
+   <ns1:parameter qname="ns8:idLivre" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="connecter" qname="ns9:connecter" soapAction="" xmlns:ns9="http://gestionnaire"/>
+  <ns1:parameter name="allowedMethods" value="setDeviseEncours effectuerPaiement prixDuLivre suppLivreDansPanier estDisponible connecter getDeviseEncours ajouterLivrePanier viderPanier"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="GesBooks"/>
+  <ns1:parameter name="className" value="gestionnaire.GesBooks"/>
+  <ns1:parameter name="wsdlServicePort" value="GesBooks"/>
+  <ns1:parameter name="schemaQualified" value="http://gestionnaire"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://gestionnaire"/>
+  <ns1:parameter name="wsdlServiceElement" value="GesBooksService"/>
+ </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
   <ns1:parameter name="enableRemoteAdmin" value="false"/>
@@ -33,17 +65,17 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="ConversionDevise" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="convertir" qname="ns1:convertir" returnQName="ns1:convertirReturn" returnType="xsd:double" soapAction="" xmlns:ns1="http://devise" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:source" type="xsd:string"/>
-   <ns2:parameter qname="ns1:cible" type="xsd:string"/>
-   <ns2:parameter qname="ns1:montant" type="xsd:double"/>
-  </ns2:operation>
+  <ns1:operation name="convertir" qname="ns10:convertir" returnQName="ns10:convertirReturn" returnType="xsd:double" soapAction="" xmlns:ns10="http://devise" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns10:source" type="xsd:string"/>
+   <ns1:parameter qname="ns10:cible" type="xsd:string"/>
+   <ns1:parameter qname="ns10:montant" type="xsd:double"/>
+  </ns1:operation>
   <ns1:parameter name="allowedMethods" value="convertir"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="ConversionDevise"/>
-  <ns1:parameter name="className" value="devise.ConversionDevise"/>
-  <ns1:parameter name="wsdlServicePort" value="ConversionDevise"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://devise"/>
+  <ns1:parameter name="wsdlServicePort" value="ConversionDevise"/>
+  <ns1:parameter name="className" value="devise.ConversionDevise"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://devise"/>
   <ns1:parameter name="wsdlServiceElement" value="ConversionDeviseService"/>
  </ns1:service>
