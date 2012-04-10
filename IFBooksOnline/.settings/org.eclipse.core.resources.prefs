@@ -1,0 +1,10 @@
+#Tue Apr 10 08:25:46 CEST 2012
+eclipse.preferences.version=1
+encoding//src/gestionnaire/GesBooks.java=UTF-8
+encoding//src/gestionnaire/GesBooksService.java=UTF-8
+encoding//src/gestionnaire/GesBooksServiceLocator.java=UTF-8
+encoding//src/gestionnaire/GesBooksSoapBindingStub.java=UTF-8
+encoding//src/gestionnaire/PaiementService.java=UTF-8
+encoding//src/gestionnaire/PaiementServiceService.java=UTF-8
+encoding//src/gestionnaire/PaiementServiceServiceLocator.java=UTF-8
+encoding//src/gestionnaire/PaiementServiceSoapBindingStub.java=UTF-8

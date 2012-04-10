@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 	Object le_user = session.getAttribute("user");
+	Object le_type = session.getAttribute("type");
 %>
 
 
@@ -44,7 +45,31 @@
 				modal: true,
 				buttons: { 
 					"Connexion": function() { 
-						//$(this).dialog("close"); 
+						$.ajax({
+			                type: "GET",
+			                url: "controller",
+			                data: "action=0",
+			                success: function(msg){
+			                    var value= $.parseJSON(msg, false);
+			                    var codemsg=value.code;
+			                    switch(codemsg){
+			                       case '0':				                           				                            
+			                            $("#msg_dialog").empty();
+			                            $("#msg_dialog").append(value.msg);
+			                            $("#msg_dialog").dialog('open');
+			                            break;
+			                       case '1':
+			                    	    $(this).dialog("close");
+			                       		<% 
+			                       			le_user = session.getAttribute("user");
+			                       			le_type = session.getAttribute("type"); 
+			                       		%>
+			                       break;
+			                        default :				                            
+			                            break;
+			                    }
+			                }
+			            });
 					},
 					"Inscription": function() { 
 						$(this).dialog("close");
@@ -68,7 +93,16 @@
 				}
 			});
 			
-			
+			$('#msg_dialog').dialog({
+				autoOpen: false,
+				width: 500,
+				modal: true,
+				buttons: { 
+					"Ok": function() { 
+						$(this).dialog("close"); 
+					} 
+				}
+			});
 		});
 	</script>
 	
@@ -87,20 +121,22 @@
 		<table>
 			<tr>
 				<td> User ID</td>
-				<td><input type="text" maxlength="15"/></td>
+				<td><input id="login" name="login" type="text" maxlength="15"/></td>
 			</tr>
 			<tr>
 				<td> Password</td>
-				<td><input type="password" maxlength="15"/></td>
+				<td><input id="pwd" name="pwd" type="password" maxlength="15"/></td>
 			</tr>
 		</table>
-		
+		<input type="hidden" id="type" name="type" value="CLIENT"/>
 	</form>
 </div>
 
 <div id="inscription" title="INSCRIPTION">
 
 </div>
+
+<div id="msg_dialog" title="Erreur Connexion"></div>
 
   <div id="wrapper">
       <div id="menu">
