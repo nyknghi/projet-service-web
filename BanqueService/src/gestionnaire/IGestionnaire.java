@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
 
+import facade.AuteurFacade;
 import facade.ClientFacade;
 import facade.CommandeFacade;
 import facade.LivreFacade;
@@ -29,5 +30,7 @@ public interface IGestionnaire extends Remote{
 	public long getLastKeyCommande() throws RemoteException;
 	public long getLastKeyClient() throws RemoteException;
 	public long getLastKeyAuteur() throws RemoteException;
-	
+	public AuteurFacade rechercherAuteurParId(long idAuteur) throws RemoteException;
+	public AuteurFacade rechercherAuteurParLogin(String login, String pwd) throws RemoteException;
+	public ClientFacade rechercherClientParLogin(String login, String pwd) throws RemoteException;
 }
