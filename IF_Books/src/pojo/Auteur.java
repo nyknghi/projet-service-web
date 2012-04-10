@@ -5,7 +5,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Auteur extends UnicastRemoteObject{
+import facade.AuteurFacade;
+
+public class Auteur extends UnicastRemoteObject implements AuteurFacade{
 	private static final long serialVersionUID = 1L;
 	private long idAuteur;
 	private String nom;
