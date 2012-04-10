@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import facade.AuteurFacade;
 import facade.ClientFacade;
 import facade.CommandeFacade;
 import facade.LivreFacade;
@@ -158,6 +159,39 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	@Override
 	public long getLastKeyAuteur() throws RemoteException {
 		return BookStore.getInstance().getAuteurs().size() + 1;
+	}
+
+	@Override
+	public AuteurFacade rechercherAuteurParId(long idAuteur)
+			throws RemoteException {
+		for (Auteur a : store.getAuteurs()){
+			if (a.getIdAuteur() == idAuteur){
+				return a;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public AuteurFacade rechercherAuteurParLogin(String login, String pwd)
+			throws RemoteException {
+		for (Auteur a : store.getAuteurs()){
+			if (a.getLogin().equals(login) && (a.getMdp().equals(pwd))){
+				return a;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public ClientFacade rechercherClientParLogin(String login, String pwd)
+			throws RemoteException {
+		for (Client c : store.getClients()){
+			if (c.getLogin().equals(login) && (c.getMdp().equals(pwd))){
+				return c;
+			}
+		}
+		return null;
 	}
 
 }

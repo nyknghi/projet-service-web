@@ -7,7 +7,7 @@ import java.util.Set;
 
 import facade.AuteurFacade;
 
-public class Auteur extends UnicastRemoteObject implements AuteurFacade{
+public class Auteur extends Client implements AuteurFacade{
 	private static final long serialVersionUID = 1L;
 	private long idAuteur;
 	private String nom;
