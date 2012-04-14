@@ -53,6 +53,7 @@
   <ns1:parameter name="schemaQualified" value="http://gestionnaire"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://gestionnaire"/>
   <ns1:parameter name="wsdlServiceElement" value="GesBooksService"/>
+  <ns1:parameter name="scope" value="Application"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
