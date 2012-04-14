@@ -9,8 +9,11 @@ public class GestionnaireServeur {
 	
 	public GestionnaireServeur(){
 		try {
-			Registry r = LocateRegistry.getRegistry();
 			
+			System.setProperty("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
+			System.setProperty("java.rmi.server.codebase", "file:///workspace/IF_Books/src/gestionnaire");
+
+			Registry r = LocateRegistry.getRegistry();
 			if (System.getSecurityManager() == null) 
 				System.setSecurityManager(new RMISecurityManager());
 						

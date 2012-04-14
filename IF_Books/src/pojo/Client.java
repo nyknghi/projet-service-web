@@ -14,6 +14,7 @@ public class Client extends UnicastRemoteObject implements ClientFacade{
 	private String nom;
 	private String login;
 	private String mdp;
+	private String type;
 	private double fonds;
 	private Map<Long, Commande> commandes = new HashMap<Long, Commande>();
 	
@@ -85,5 +86,13 @@ public class Client extends UnicastRemoteObject implements ClientFacade{
 	
 	public void ajouterCommande(Commande commande){
 		this.commandes.put(commande.getIdCommande(), commande);
+	}
+
+	public String getType() throws RemoteException {
+		return this.type;
+	}
+
+	public void setType(String type) throws RemoteException {
+		this.type = type;
 	}
 }
