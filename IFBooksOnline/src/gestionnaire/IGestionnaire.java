@@ -1,8 +1,10 @@
-package facade;
+package gestionnaire;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Map;
+
+import facade.AuteurFacade;
 import facade.ClientFacade;
 import facade.CommandeFacade;
 import facade.LivreFacade;

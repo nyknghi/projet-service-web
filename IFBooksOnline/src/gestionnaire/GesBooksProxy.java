@@ -1,7 +1,5 @@
 package gestionnaire;
 
-import java.rmi.RemoteException;
-
 public class GesBooksProxy implements gestionnaire.GesBooks {
   private String _endpoint = null;
   private gestionnaire.GesBooks gesBooks = null;
@@ -45,69 +43,60 @@ public class GesBooksProxy implements gestionnaire.GesBooks {
       _initGesBooksProxy();
     return gesBooks;
   }
-
-@Override
-public void viderPanier() throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	gesBooks.viderPanier();
-}
-
-@Override
-public double prixDuLivre(long idLivre) throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	return gesBooks.prixDuLivre(idLivre);
-}
-
-@Override
-public boolean effectuerPaiement(long idClient) throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	return gesBooks.effectuerPaiement(idClient);
-}
-
-@Override
-public void ajouterLivrePanier(long idLivre, int qteACommande)
-		throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	gesBooks.ajouterLivrePanier(idLivre, qteACommande);
-}
-
-@Override
-public void setDeviseEncours(String deviseEncours) throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	gesBooks.setDeviseEncours(deviseEncours);
-}
-
-@Override
-public boolean estDisponible(long idLivre) throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	return gesBooks.estDisponible(idLivre);
-}
-
-@Override
-public String getDeviseEncours() throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	return gesBooks.getDeviseEncours();
-}
-
-@Override
-public void suppLivreDansPanier(long idLivre) throws RemoteException {
-	if (gesBooks == null)
-		_initGesBooksProxy();
-	gesBooks.suppLivreDansPanier(idLivre);
-}
-
-@Override
-public void connecter() throws RemoteException {
-	// TODO Auto-generated method stub
-	
-}
+  
+  public void viderPanier() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.viderPanier();
+  }
+  
+  public double prixDuLivre(long idLivre) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.prixDuLivre(idLivre);
+  }
+  
+  public boolean effectuerPaiement(long idClient) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.effectuerPaiement(idClient);
+  }
+  
+  public void ajouterLivrePanier(long idLivre, int qteACommande) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.ajouterLivrePanier(idLivre, qteACommande);
+  }
+  
+  public void setDeviseEncours(java.lang.String deviseEncours) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.setDeviseEncours(deviseEncours);
+  }
+  
+  public boolean estDisponible(long idLivre) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.estDisponible(idLivre);
+  }
+  
+  public java.lang.String getDeviseEncours() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.getDeviseEncours();
+  }
+  
+  public void suppLivreDansPanier(long idLivre) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.suppLivreDansPanier(idLivre);
+  }
+  
+  public void connecter() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.connecter();
+  }
   
   
 }
