@@ -6,14 +6,16 @@ import java.rmi.registry.Registry;
 
 public class GestionnaireServeur {
 	static IGestionnaire gest;
+	static String PATH_POLICY="D:/my documents/M2_IF/Service web/IF_Books/src/sec.policy";
+	static String PATH_CODEBASE="file:///my documents/M2_IF/Service web/IF_Books/src/gestionnaire/";
 	
 	public GestionnaireServeur(){
 		try {
-			
-			System.setProperty("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
-			System.setProperty("java.rmi.server.codebase", "file:///workspace/IF_Books/src/gestionnaire");
-
 			Registry r = LocateRegistry.getRegistry();
+			System.setProperty("java.security.policy", GestionnaireServeur.PATH_POLICY);
+			System.setProperty("java.rmi.server.codebase", GestionnaireServeur.PATH_CODEBASE);
+			
+			
 			if (System.getSecurityManager() == null) 
 				System.setSecurityManager(new RMISecurityManager());
 						
