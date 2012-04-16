@@ -13,7 +13,7 @@ public class GestionnaireServeur {
 			Util.PATH_USER_DIR=System.getProperty("user.dir");
 			System.setProperty("java.security.policy", Util.PATH_POLICY);
 			System.setProperty("java.rmi.server.codebase", Util.PATH_CODEBASE);
-			System.out.println(Util.PATH_POLICY);
+			System.out.println(Util.PATH_CODEBASE);
 			Registry r = LocateRegistry.getRegistry();		
 			
 			if (System.getSecurityManager() == null) 
