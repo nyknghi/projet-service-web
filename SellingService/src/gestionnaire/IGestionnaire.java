@@ -17,7 +17,7 @@ public interface IGestionnaire extends Remote{
 	public Map<Long,LivreFacade> rechercherParAuteur (long idAuteur) throws RemoteException;
 	public boolean estDisponible(long idLivre) throws RemoteException; 
 	
-	public ClientFacade ajouterClient (long idClient, String nom, String login, String mdp) throws RemoteException;
+	public ClientFacade ajouterClient (long idClient, String nom, String login, String mdp,String type) throws RemoteException;
 	
 	public CommandeFacade ajouterCommande(long id, long idClient, Map<Integer, Long> livres) throws RemoteException;
 	public CommandeFacade rechercherCommande(long id) throws RemoteException;
