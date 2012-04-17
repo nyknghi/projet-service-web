@@ -1,8 +1,5 @@
 package gestionnaire;
 
-import facade.AuteurFacade;
-import facade.ClientFacade;
-
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
@@ -18,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.*;
+import facade.AuteurFacade;
+import facade.ClientFacade;
 
 public class Controller extends HttpServlet{
 	InitialContext ctx;
@@ -60,17 +56,11 @@ public class Controller extends HttpServlet{
 			try {
 				;
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 			break;
 		case 0:
-			try {
-				connexion(request, response);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			connexion(request, response);
 			break;
 		default:
 			request.getRequestDispatcher("/index.jsp").forward(request,
@@ -89,12 +79,7 @@ public class Controller extends HttpServlet{
 			option = Integer.parseInt(opt);
 		switch (option) {
 		case 0:
-			try {
-				connexion(request, response);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			connexion(request, response);
 			break;
 		default:
 			request.getRequestDispatcher("/index.jsp").forward(request,
@@ -104,7 +89,7 @@ public class Controller extends HttpServlet{
 	}
 
 	protected void connexion(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException, JSONException {
+			HttpServletResponse response) throws ServletException, IOException {
 		boolean success = false;
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
@@ -123,20 +108,11 @@ public class Controller extends HttpServlet{
 				session.setAttribute("user", client);
 			}
 		}
-		
-		JSONObject jMsg = new JSONObject();
 		if (!success) {
-			String message = "Login et/ou mot de passe incorrect";
-			request.setAttribute("errorMessage", message);
-			jMsg.put("msg", "<br /> Erreur de Traitement, la requete n'a pu être effectué <br />");
-			jMsg.put("code", "0");
-			request.getRequestDispatcher("index.jsp").forward(request,response);
-		} else {
-			jMsg.put("msg", " connexion reussi");	
-			jMsg.put("code", "1");
-			request.getRequestDispatcher("/index.jsp").forward(request,
-					response);
+			request.setAttribute("errorMessage", "Login et/ou mot de passe incorrect");
 		}
+		request.getRequestDispatcher("/index.jsp").forward(request,
+					response);
 	}
 
 	public void init() throws ServletException {
@@ -153,9 +129,9 @@ public class Controller extends HttpServlet{
 			System.out.println(key + "\t -> \t" + syst.getProperty(key));
 		}
 		String path = System.getProperties().getProperty("user.home");
-		System.out.println("chenmin  " + path);
+		System.out.println("chenmin  " + path);*/
 		System.setProperty("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
-		System.setProperty("java.rmi.server.codebase", "file:///workspace/IF_Books/src/gestionnaire/");*/
+		System.setProperty("java.rmi.server.codebase", "file:///workspace/BooksOnline/src/gestionnaire/");
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());
 		
