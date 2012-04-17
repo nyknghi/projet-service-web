@@ -70,7 +70,7 @@ public class PaiementService {
 		listeLivreCommandee.put(new Integer(1), new Long(1));
 		listeLivreCommandee.put(new Integer(3), new Long(2));
 		
-		ClientFacade client = gest.ajouterClient(1, "Client 1", "c1", "1234");
+		ClientFacade client = gest.ajouterClient(1, "Client 1", "c1", "1234","CLIENT");
 		client.ajouterFonds(100);
 		
 		CommandeFacade commande = gest.ajouterCommande(new Long(1), new Long(1), listeLivreCommandee);
