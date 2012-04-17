@@ -20,12 +20,13 @@ public class Client extends UnicastRemoteObject implements ClientFacade{
 	
 	public Client() throws RemoteException{}
 
-	public Client(long idClient, String nom, String login, String mdp) throws RemoteException {
+	public Client(long idClient, String nom, String login, String mdp, String type) throws RemoteException {
 		this.idClient = idClient;
 		this.nom = nom;
 		this.login = login;
 		this.mdp = mdp;
 		this.fonds = 5.0;
+		this.type = type;
 	}
 
 	public void ajouterFonds(double montant){

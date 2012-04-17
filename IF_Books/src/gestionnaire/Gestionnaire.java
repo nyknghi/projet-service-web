@@ -140,8 +140,8 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public ClientFacade ajouterClient(long idClient, String nom, String login, String mdp) throws RemoteException {
-		Client client = new Client(idClient, nom, login, mdp);
+	public ClientFacade ajouterClient(long idClient, String nom, String login, String mdp, String type) throws RemoteException {
+		Client client = new Client(idClient, nom, login, mdp, type);
 		store.addClient(client);
 		return client;
 	}
