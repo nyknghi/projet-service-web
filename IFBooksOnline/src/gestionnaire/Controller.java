@@ -6,6 +6,7 @@ import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Properties;
 
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
@@ -130,8 +131,11 @@ public class Controller extends HttpServlet{
 		}
 		String path = System.getProperties().getProperty("user.home");
 		System.out.println("chenmin  " + path);*/
-		System.setProperty("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
-		System.setProperty("java.rmi.server.codebase", "file:///workspace/BooksOnline/src/gestionnaire/");
+		Properties env = System.getProperties();
+		//System.setProperty("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
+		//System.setProperty("java.rmi.server.codebase", "file:///workspace/IF_Books/src/gestionnaire/");
+		env.put("java.rmi.server.codebase", "file:/workspace/IF_Books/src/gestionnaire/");
+		env.put("java.security.policy", "E:/workspace/BooksOnline/src/sec.policy");
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());
 		
