@@ -39,4 +39,8 @@ public interface IGestionnaire extends Remote{
 	public void envoyerManuscrit(long idAuteur, long idLivre, long idSousCatalogue) throws RemoteException;
 	public void modifierLivre(long idAuteur, long idLivre) throws RemoteException;
 	public void validerManuscrit(long idLivre) throws RemoteException;
+	
+	// Connexion des ordinateurs
+	public void subscribe (IOrdinateur ord) throws RemoteException;
+	public void unsubscribe (IOrdinateur ord) throws RemoteException;
 }

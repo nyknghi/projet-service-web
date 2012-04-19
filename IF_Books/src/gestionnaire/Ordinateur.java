@@ -1,46 +1,60 @@
 package gestionnaire;
 
-import java.rmi.NotBoundException;
 import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 
-import facade.LivreFacade;
+import pojo.Livre;
+import pojo.SousCatalogue;
 
-public class Ordinateur {
-	public static void main(String[] args) {
+/* Observer */
+public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
+	private static final long serialVersionUID = 1L;
+
+	private SousCatalogue sousCatalogue;
+	
+	public Ordinateur() throws RemoteException{
+		super();
+	}
+	
+	public void subscribeToObservee() {
 		try {
 			Registry r = LocateRegistry.getRegistry();
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
 			
 			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");
-			
-			/*Auteur a = new Auteur(1, "AAA");
-			SousCatalogue eco_gest = new SousCatalogue(1, "Eco-Gestion");
-			*/
-			System.out.println("Client connected !");
-			
-			gest.ajouterSousCatalogue(1, "Gestion");
-			gest.ajouterAuteur(1, "AAA");
-			
-			gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1);
-			//LivreFacade livre =	(LivreFacade) gest.rechercherParTitre("Finance").get(0);
-			
-			//gest.rechercherParTitre("Finance");
-			LivreFacade livre = (LivreFacade) gest.rechercherParTitre("Finance").get(new Long(1));
-			
-			System.out.println(livre);
-			System.out.println(livre.getClass());
-			
-			System.out.println("End connection !");
-		}	
-		catch (RemoteException re) {
-			System.out.println("java.rmi.RemoteException" + re);
+			gest.subscribe(this);
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+	}
+
+	public SousCatalogue getSousCatalogue() {
+		return sousCatalogue;
+	}
+
+	public void setSousCatalogue(SousCatalogue sousCatalogue) {
+		this.sousCatalogue = sousCatalogue;
+	}
+
+	@Override
+	public void ajouterLivre(Livre livre) throws RemoteException {
+		if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
+			System.out.println("Nouveau livre ajoute !");
+			this.sousCatalogue.ajouterLivre(livre);
 		}
-		catch (NotBoundException nbe){
-			System.out.println("java.rmi.NotBoundException" + nbe);
-		}
+		
+	}
+
+	@Override
+	public void supprimerLivre(Livre livre) throws RemoteException {
+		if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
+			System.out.println("Nouveau livre ajoute !");
+			this.sousCatalogue.removeLivre(livre.getIdLivre());
+		}		
 	}
 }
+

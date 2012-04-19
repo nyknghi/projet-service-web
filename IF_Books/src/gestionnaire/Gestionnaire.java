@@ -3,6 +3,7 @@ package gestionnaire;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -20,15 +21,26 @@ import pojo.Commande;
 import pojo.Livre;
 import pojo.SousCatalogue;
 
+/* Observee */
 public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
+	private static final long serialVersionUID = 1L;
+	
 	BookStore store = BookStore.getInstance();
+	Set<IOrdinateur> ordinateurs = new HashSet<IOrdinateur>();
 	
 	public Gestionnaire() throws RemoteException {
 		super();
 	}
+	
+	@Override
+	public void subscribe(IOrdinateur ord) throws RemoteException {
+		ordinateurs.add(ord);
+	}
 
-	private static final long serialVersionUID = 1L;
-
+	@Override
+	public void unsubscribe(IOrdinateur ord) throws RemoteException {
+		ordinateurs.remove(ord);
+	}
 	
 	@Override
 	public void ajouterAuteur(long id, String nom) throws RemoteException {
@@ -49,6 +61,11 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		
 		a.ajouterLivre(livre);
 		sc.ajouterLivre(livre);
+		
+		// Signale a tous les ordinateurs qu'il y a un nouveau livre qui arrive
+		for (IOrdinateur o : ordinateurs){
+			o.ajouterLivre(livre);
+		}
 	}
 
 	@Override
@@ -56,6 +73,10 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		Livre livre = (Livre) rechercherParId(idLivre);
 		livre.getCatalogue().removeLivre(livre.getIdLivre());
 		livre.getAuteur().removeLivre(livre.getIdLivre());
+		
+		for (IOrdinateur o : ordinateurs){
+			o.supprimerLivre(livre);
+		}
 	}
 
 	@Override
