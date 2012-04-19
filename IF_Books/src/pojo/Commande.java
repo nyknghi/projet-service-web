@@ -95,7 +95,15 @@ public class Commande extends UnicastRemoteObject implements CommandeFacade{
 		this.livres = livres;
 	}	
 	
-	/*
-	 * TODO: Gestion des etapes
-	 */
+	public void valider(){
+		if (etape.equals(Etape.CREEE)){
+			etape = Etape.LIVREE;
+		} else if (etape.equals(Etape.ANNULEE)){
+			System.out.println("Commande annulee !");
+		}
+	}
+	
+	public void annuler(){
+		etape = Etape.ANNULEE;
+	}
 }

@@ -24,6 +24,8 @@ public interface IGestionnaire extends Remote{
 	
 	public CommandeFacade ajouterCommande(long id, long idClient, Map<Integer, Long> livres) throws RemoteException;
 	public CommandeFacade rechercherCommande(long id) throws RemoteException;
+	public CommandeFacade validerCommande(long id) throws RemoteException;
+	public CommandeFacade annulerCommande(long id) throws RemoteException;
 	
 	public ClientFacade rechercherClientParId(long idClient) throws RemoteException;
 	public boolean verifierFonds(long idClient, double montantAchat) throws RemoteException;

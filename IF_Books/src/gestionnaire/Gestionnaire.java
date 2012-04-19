@@ -215,4 +215,17 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		a.envoyerManuscrit(liv, sc);
 	}
 
+	@Override
+	public CommandeFacade validerCommande(long id) throws RemoteException {
+		Commande com = (Commande) rechercherCommande(id);
+		com.valider();
+		return com;
+	}
+
+	@Override
+	public CommandeFacade annulerCommande(long id) throws RemoteException {
+		Commande com = (Commande) rechercherCommande(id);
+		com.annuler();
+		return com;
+	}
 }
