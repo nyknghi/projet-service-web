@@ -194,4 +194,25 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return null;
 	}
 
+	@Override
+	public void modifierLivre(long idAuteur, long idLivre) throws RemoteException {
+		Auteur a = (Auteur) rechercherAuteurParId(idAuteur);
+		Livre liv = (Livre) rechercherParId(idLivre);
+		a.modifierManuscrit(liv);
+	}
+
+	@Override
+	public void validerManuscrit(long idLivre) throws RemoteException {
+		Livre liv = (Livre) rechercherParId(idLivre);
+		liv.setDiffuse(true);
+	}
+
+	@Override
+	public void envoyerManuscrit(long idAuteur, long idLivre, long idSousCatalogue) throws RemoteException {
+		Auteur a = (Auteur) rechercherAuteurParId(idAuteur);
+		Livre liv = (Livre) rechercherParId(idLivre);
+		SousCatalogue sc = store.getCatalogue().findSousCatalogue(idSousCatalogue);
+		a.envoyerManuscrit(liv, sc);
+	}
+
 }

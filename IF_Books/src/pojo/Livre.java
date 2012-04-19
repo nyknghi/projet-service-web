@@ -15,6 +15,8 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 	private double prix;
 	private Auteur auteur;
 	private SousCatalogue catalogue;
+	private boolean diffuse;
+	private String description;
 	
 	public Livre() throws RemoteException{}
 	
@@ -26,6 +28,7 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 		this.auteur = auteur;
 		this.catalogue = catalogue;
 		this.datePublication = new Date();
+		this.diffuse = false;
 	}
 	
 	public boolean isDisponible(){
@@ -86,6 +89,22 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 
 	public void setCatalogue(SousCatalogue catalogue) {
 		this.catalogue = catalogue;
+	}
+
+	public boolean isDiffuse() {
+		return diffuse;
+	}
+
+	public void setDiffuse(boolean diffuse) {
+		this.diffuse = diffuse;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String afficher() throws RemoteException {

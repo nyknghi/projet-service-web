@@ -1,7 +1,6 @@
 package pojo;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +18,25 @@ public class Auteur extends Client implements AuteurFacade{
 		this.idAuteur = idAuteur;
 		this.nom = nom;
 	}
+	
+	public void envoyerManuscrit(Livre livre, SousCatalogue sc){
+		ajouterLivre(livre);
+		sc.ajouterLivre(livre);
+		livre.setDiffuse(false);
+	}
 
+	public void modifierManuscrit(Livre livre){
+		boolean trouve=false;
+		for (Livre liv : livres){
+			if (liv.getIdLivre()==livre.getIdLivre()){
+				trouve=true;
+				liv.setDescription(livre.getDescription());
+				liv.setTitre(livre.getTitre());
+			}
+		}
+		if (!trouve) System.out.println("Pas droit de modification");
+	}
+	
 	public long getIdAuteur() {
 		return idAuteur;
 	}

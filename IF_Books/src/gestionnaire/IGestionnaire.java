@@ -33,4 +33,8 @@ public interface IGestionnaire extends Remote{
 	public AuteurFacade rechercherAuteurParId(long idAuteur) throws RemoteException;
 	public AuteurFacade rechercherAuteurParLogin(String login, String pwd) throws RemoteException;
 	public ClientFacade rechercherClientParLogin(String login, String pwd) throws RemoteException;
+	
+	public void envoyerManuscrit(long idAuteur, long idLivre, long idSousCatalogue) throws RemoteException;
+	public void modifierLivre(long idAuteur, long idLivre) throws RemoteException;
+	public void validerManuscrit(long idLivre) throws RemoteException;
 }
