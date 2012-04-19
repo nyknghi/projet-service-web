@@ -83,7 +83,7 @@ public class Controller extends HttpServlet{
 			connexion(request, response);
 			break;
 		default:
-			request.getRequestDispatcher("/index.jsp").forward(request,
+			request.getRequestDispatcher("index.jsp").forward(request,
 					response);
 			break;
 		}
@@ -95,10 +95,11 @@ public class Controller extends HttpServlet{
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
 		HttpSession session = request.getSession();
-		
+		System.out.println("On est ici au debut");
 		ClientFacade client = gest.rechercherClientParLogin(login, pwd);
 		if(client!=null){
 			success = true;
+			System.out.println("on est ici c bien passé");
 			if(client.getType().equals("Auteur")){
 				AuteurFacade auteur = gest.rechercherAuteurParId(client.getIdClient());
 				session.setAttribute("type", "auteur");
@@ -110,10 +111,10 @@ public class Controller extends HttpServlet{
 			}
 		}
 		if (!success) {
+			System.out.println("on est ici c mall  malll malll malll passé");
 			request.setAttribute("errorMessage", "Login et/ou mot de passe incorrect");
 		}
-		request.getRequestDispatcher("/index.jsp").forward(request,
-					response);
+		request.getRequestDispatcher("index.jsp").forward(request,response);
 	}
 
 	public void init() throws ServletException {
