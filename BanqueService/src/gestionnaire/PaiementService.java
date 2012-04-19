@@ -16,7 +16,7 @@ public class PaiementService {
 	
 	public PaiementService(){}
 	
-	public static void connecter(){
+	/*public static void connecter(){
 		
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());
@@ -29,7 +29,7 @@ public class PaiementService {
 			e.printStackTrace();
 		}
 	}
-	
+	*/
 	public static boolean isFondsDispo(long idClient, double montant) throws RemoteException{
 		return gest.verifierFonds(idClient, montant);
 	}
@@ -48,7 +48,7 @@ public class PaiementService {
 	/*
 	 * Jeux de test
 	 */
-	public static void main(String[] args) throws RemoteException {
+	/*public static void main(String[] args) throws RemoteException {
 		connecter();
 		System.out.println("Client connected !");
 		
@@ -65,7 +65,7 @@ public class PaiementService {
 		
 		/*
 		 * Creation d'une commande
-		 */
+		 
 		Map<Integer, Long> listeLivreCommandee = new HashMap<Integer, Long>();
 		listeLivreCommandee.put(new Integer(1), new Long(1));
 		listeLivreCommandee.put(new Integer(3), new Long(2));
@@ -84,10 +84,10 @@ public class PaiementService {
 		
 		/*
 		 * Regler commande
-		 */
+		 
 		effectuerPaiement(new Long(1), new Long(1));
 		System.out.println("Nouveau Compte client : " + client.getFonds());
 		
 		System.out.println("End connection !");
-	}
+	}*/
 }
