@@ -133,7 +133,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		
 		Commande commande = new Commande(id, client);
 		for(Entry <Integer, Long> entry : livres.entrySet()) {
-			Livre liv = (Livre)rechercherParId(entry.getValue());
+			LivreFacade liv = rechercherParId(entry.getValue());
 			commande.ajouterLivreCommande(liv, entry.getKey());
 		}
 		store.addCommande(commande);

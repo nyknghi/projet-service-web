@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import facade.CommandeFacade;
+import facade.LivreFacade;
 
 public class Commande extends UnicastRemoteObject implements CommandeFacade{
 	private static final long serialVersionUID = 1L;
@@ -15,7 +16,7 @@ public class Commande extends UnicastRemoteObject implements CommandeFacade{
 	private Client client;
 	
 	// Livre et sa quantite
-	private Map<Integer, Livre> livres = new HashMap<Integer, Livre>();
+	private Map<Integer, LivreFacade> livres = new HashMap<Integer, LivreFacade>();
 	
 	private double montant = 0.0;
 	private Date dateCommande;
@@ -34,14 +35,14 @@ public class Commande extends UnicastRemoteObject implements CommandeFacade{
 		calculMontant();
 	}
 	
-	public void ajouterLivreCommande(Livre livre, int quantite){
+	public void ajouterLivreCommande(LivreFacade livre, int quantite){
 		this.livres.put(quantite, livre);		
 	}
 	
-	public void calculMontant(){
+	public void calculMontant() throws RemoteException{
 		double res=0;
-		for(Entry <Integer, Livre> entry : this.livres.entrySet()) {
-			Livre liv = entry.getValue();
+		for(Entry <Integer, LivreFacade> entry : this.livres.entrySet()) {
+			LivreFacade liv = entry.getValue();
 			res += liv.getPrix()*entry.getKey();
 		}
 		this.montant = res;
@@ -87,11 +88,11 @@ public class Commande extends UnicastRemoteObject implements CommandeFacade{
 		this.idCommande = idCommande;
 	}
 
-	public Map<Integer, Livre> getLivres() {
+	public Map<Integer, LivreFacade> getLivres() {
 		return livres;
 	}
 
-	public void setLivres(Map<Integer, Livre> livres) {
+	public void setLivres(Map<Integer, LivreFacade> livres) {
 		this.livres = livres;
 	}	
 	

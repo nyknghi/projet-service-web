@@ -54,7 +54,7 @@ public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
 	public void ajouterLivre(LivreFacade livre) throws RemoteException {
 		if (this.sousCatalogue!=null){
 			if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
-				System.out.println("Ordinateur " + idOrdinateur + " : Nouveau livre ajoute !");
+				System.out.println("Ordinateur " + idOrdinateur + " : Nouveau livre " + livre.getIdLivre() + " ajoute !");
 				this.sousCatalogue.ajouterLivre(livre);
 			}
 		}
