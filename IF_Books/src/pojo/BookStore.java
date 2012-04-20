@@ -1,5 +1,7 @@
 package pojo;
 
+import gestionnaire.IOrdinateur;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
@@ -12,6 +14,7 @@ public class BookStore extends UnicastRemoteObject{
 	private Set<Client> clients;
 	private Set<Commande> commandes;
 	private Catalogue catalogue;
+	private Set<IOrdinateur> ordinateurs = new HashSet<IOrdinateur>();
 	
 	private static BookStore instance; 
 	
@@ -84,5 +87,21 @@ public class BookStore extends UnicastRemoteObject{
 	public void setCatalogue(Catalogue catalogue) {
 		this.catalogue = catalogue;
 	}
+
+	public Set<IOrdinateur> getOrdinateurs() {
+		return ordinateurs;
+	}
+
+	public void setOrdinateurs(Set<IOrdinateur> ordinateurs) {
+		this.ordinateurs = ordinateurs;
+	}
 	
+	public IOrdinateur rechercherOrdinateur(long idOrd) throws RemoteException {
+		for (IOrdinateur ord : ordinateurs){
+			if (ord.getIdOrdinateur() == idOrd){
+				return ord;
+			}
+		}
+		return null;
+	}
 }

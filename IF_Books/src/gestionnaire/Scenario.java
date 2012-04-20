@@ -12,9 +12,9 @@ public class Scenario {
 	
 	public static void main(String[] args) {
 		try {
-			Ordinateur ord1 = new Ordinateur();
-			Ordinateur ord2 = new Ordinateur();
-			Ordinateur ord3 = new Ordinateur();
+			Ordinateur ord1 = new Ordinateur(1);
+			Ordinateur ord2 = new Ordinateur(2);
+			Ordinateur ord3 = new Ordinateur(3);
 			
 			ord1.subscribeToObservee();
 			ord2.subscribeToObservee();
@@ -40,7 +40,7 @@ public class Scenario {
 			*/
 			System.out.println("Client connected !");
 			
-			gest.ajouterSousCatalogue(1, "Gestion");
+			gest.ajouterSousCatalogue(1, "Gestion", 1);
 			gest.ajouterAuteur(1, "AAA");
 			
 			gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1);

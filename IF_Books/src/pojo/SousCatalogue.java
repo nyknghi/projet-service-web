@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class SousCatalogue extends UnicastRemoteObject{
+import facade.LivreFacade;
+import facade.SousCatalogueFacade;
+
+public class SousCatalogue extends UnicastRemoteObject implements SousCatalogueFacade{
 	private static final long serialVersionUID = 1L;
 	private long idCatalogue;
 	private String intitule;
 	
-	private Map<Long,Livre> livres = new HashMap<Long,Livre>();
+	private Map<Long,LivreFacade> livres = new HashMap<Long,LivreFacade>();
 	
 	public SousCatalogue() throws RemoteException{
 		super();
@@ -22,36 +25,36 @@ public class SousCatalogue extends UnicastRemoteObject{
 		this.intitule = intitule;
 	}
 
-	public Map<Long,Livre> getLivres() {
+	public Map<Long,LivreFacade> getLivres() {
 		return livres;
 	}
 
-	public void setLivres(Map<Long,Livre> livres) {
+	public void setLivres(Map<Long,LivreFacade> livres) {
 		this.livres = livres;
 	}
 	
-	public void ajouterLivre(Livre livre){
+	public void ajouterLivre(LivreFacade livre) throws RemoteException{
 		this.livres.put(livre.getIdLivre(), livre);
 	}
 	
-	public Livre getLivreParId(long idLivre){
+	public LivreFacade getLivreParId(long idLivre){
 		return livres.get(idLivre);
 	}
 	
-	public Map<Long,Livre> getLivreByAuteur(Auteur auteur){
-		Map<Long, Livre> res = new HashMap<Long, Livre>();
-		for(Entry <Long, Livre> entry : livres.entrySet()) {
-			Livre liv = entry.getValue();
+	public Map<Long,LivreFacade> getLivreByAuteur(Auteur auteur) throws RemoteException{
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		for(Entry <Long, LivreFacade> entry : livres.entrySet()) {
+			LivreFacade liv = entry.getValue();
 			if (liv.getAuteur().equals(auteur))
 				res.put(liv.getIdLivre(), liv);
 		}
 		return res;
 	}
 	
-	public Map<Long,Livre> getLivreByTitre(String titre){
-		Map<Long, Livre> res = new HashMap<Long, Livre>();
-		for(Entry <Long, Livre> entry : livres.entrySet()) {
-			Livre liv = entry.getValue();
+	public Map<Long,LivreFacade> getLivreByTitre(String titre) throws RemoteException{
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		for(Entry <Long, LivreFacade> entry : livres.entrySet()) {
+			LivreFacade liv = entry.getValue();
 			if (liv.getTitre().contains(titre)){
 				res.put(liv.getIdLivre(), liv);
 			}

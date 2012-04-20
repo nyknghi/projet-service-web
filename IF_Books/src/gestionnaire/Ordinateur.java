@@ -6,17 +6,21 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import pojo.Livre;
-import pojo.SousCatalogue;
+import facade.LivreFacade;
+import facade.SousCatalogueFacade;
+
+import pojo.BookStore;
 
 /* Observer */
 public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
 	private static final long serialVersionUID = 1L;
-
-	private SousCatalogue sousCatalogue;
+	private long idOrdinateur;
+	private SousCatalogueFacade sousCatalogue;
 	
-	public Ordinateur() throws RemoteException{
+	public Ordinateur(long id) throws RemoteException{
 		super();
+		this.idOrdinateur = id;
+		BookStore.getInstance().getOrdinateurs().add(this);
 	}
 	
 	public void subscribeToObservee() {
@@ -33,35 +37,43 @@ public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
 			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");
 			gest.subscribe(this);
 			
-			//gest.find();
 		} catch (Exception e) { 
 			e.printStackTrace(); 
 		} 
 	}
 
-	public SousCatalogue getSousCatalogue() {
+	public SousCatalogueFacade getSousCatalogue() {
 		return sousCatalogue;
 	}
 
-	public void setSousCatalogue(SousCatalogue sousCatalogue) {
+	public void setSousCatalogue(SousCatalogueFacade sousCatalogue) {
 		this.sousCatalogue = sousCatalogue;
 	}
 
 	@Override
-	public void ajouterLivre(Livre livre) throws RemoteException {
-		if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
-			System.out.println("Nouveau livre ajoute !");
-			this.sousCatalogue.ajouterLivre(livre);
+	public void ajouterLivre(LivreFacade livre) throws RemoteException {
+		if (this.sousCatalogue!=null){
+			if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
+				System.out.println("Ordinateur " + idOrdinateur + " : Nouveau livre ajoute !");
+				this.sousCatalogue.ajouterLivre(livre);
+			}
 		}
-		
 	}
 
 	@Override
-	public void supprimerLivre(Livre livre) throws RemoteException {
+	public void supprimerLivre(LivreFacade livre) throws RemoteException {
 		if (livre.getCatalogue().getIdCatalogue() == this.sousCatalogue.getIdCatalogue()){
 			System.out.println("Nouveau livre ajoute !");
 			this.sousCatalogue.removeLivre(livre.getIdLivre());
 		}		
+	}
+
+	public long getIdOrdinateur() {
+		return idOrdinateur;
+	}
+
+	public void setIdOrdinateur(long idOrdinateur) {
+		this.idOrdinateur = idOrdinateur;
 	}
 }
 

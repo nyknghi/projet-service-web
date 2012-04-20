@@ -5,6 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 
 import facade.LivreFacade;
+import facade.SousCatalogueFacade;
 
 public class Livre extends UnicastRemoteObject implements LivreFacade{
 	private static final long serialVersionUID = 1L;
@@ -14,7 +15,7 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 	private int nbDisponibles;
 	private double prix;
 	private Auteur auteur;
-	private SousCatalogue catalogue;
+	private SousCatalogueFacade catalogue;
 	private boolean diffuse;
 	private String description;
 	
@@ -83,11 +84,11 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 		this.auteur = auteur;
 	}
 
-	public SousCatalogue getCatalogue() {
+	public SousCatalogueFacade getCatalogue() {
 		return catalogue;
 	}
 
-	public void setCatalogue(SousCatalogue catalogue) {
+	public void setCatalogue(SousCatalogueFacade catalogue) {
 		this.catalogue = catalogue;
 	}
 

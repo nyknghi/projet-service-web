@@ -25,7 +25,6 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	private static final long serialVersionUID = 1L;
 	
 	BookStore store = BookStore.getInstance();
-	Set<IOrdinateur> ordinateurs = new HashSet<IOrdinateur>();
 	
 	public Gestionnaire() throws RemoteException {
 		super();
@@ -33,22 +32,30 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	
 	@Override
 	public void subscribe(IOrdinateur ord) throws RemoteException {
-		ordinateurs.add(ord);
+		BookStore.getInstance().getOrdinateurs().add(ord);
 	}
 
 	@Override
 	public void unsubscribe(IOrdinateur ord) throws RemoteException {
-		ordinateurs.remove(ord);
+		BookStore.getInstance().getOrdinateurs().remove(ord);
 	}
 	
+	@Override
+	public IOrdinateur rechercherOrdinateur(long idOrd) throws RemoteException {
+		return BookStore.getInstance().rechercherOrdinateur(idOrd);
+	}
+
 	@Override
 	public void ajouterAuteur(long id, String nom) throws RemoteException {
 		store.getAuteurs().add(new Auteur(id, nom));		
 	}
 	
 	@Override
-	public void ajouterSousCatalogue(long idCat, String intitule) throws RemoteException {
-		store.getCatalogue().addSousCatalogue(new SousCatalogue(idCat, intitule));
+	public void ajouterSousCatalogue(long idCat, String intitule, long idOrd) throws RemoteException {
+		IOrdinateur ord = rechercherOrdinateur(idOrd);
+		SousCatalogue sc = new SousCatalogue(idCat, intitule);
+		store.getCatalogue().addSousCatalogue(sc);
+		ord.setSousCatalogue(sc);
 	}
 	
 	@Override
@@ -62,7 +69,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		sc.ajouterLivre(livre);
 		
 		// Signale a tous les ordinateurs qu'il y a un nouveau livre qui arrive
-		for (IOrdinateur o : ordinateurs){
+		for (IOrdinateur o : BookStore.getInstance().getOrdinateurs()){
 			o.ajouterLivre(livre);
 		}
 	}
@@ -73,7 +80,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		livre.getCatalogue().removeLivre(livre.getIdLivre());
 		livre.getAuteur().removeLivre(livre.getIdLivre());
 		
-		for (IOrdinateur o : ordinateurs){
+		for (IOrdinateur o : BookStore.getInstance().getOrdinateurs()){
 			o.supprimerLivre(livre);
 		}
 	}
@@ -81,7 +88,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	@Override
 	public LivreFacade rechercherParId(long idLivre) throws RemoteException {
 		for (SousCatalogue sc : store.getCatalogue().getSous_cat()){
-			Livre livre = sc.getLivreParId(idLivre); 
+			LivreFacade livre = sc.getLivreParId(idLivre); 
 			if (livre != null){
 				return livre;
 			}

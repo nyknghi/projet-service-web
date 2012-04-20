@@ -20,7 +20,7 @@ public class Auteur extends Client implements AuteurFacade{
 		this.nom = nom;
 	}
 	
-	public void envoyerManuscrit(Livre livre, SousCatalogue sc){
+	public void envoyerManuscrit(Livre livre, SousCatalogue sc) throws RemoteException{
 		ajouterLivre(livre);
 		sc.ajouterLivre(livre);
 		livre.setDiffuse(false);

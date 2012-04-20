@@ -3,9 +3,14 @@ package gestionnaire;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import pojo.Livre;
+import facade.LivreFacade;
+import facade.SousCatalogueFacade;
 
 public interface IOrdinateur extends Remote{
-	public void ajouterLivre(Livre livre) throws RemoteException;
-	public void supprimerLivre(Livre livre) throws RemoteException;
+	public void ajouterLivre(LivreFacade livre) throws RemoteException;
+	public void supprimerLivre(LivreFacade livre) throws RemoteException;
+	public SousCatalogueFacade getSousCatalogue() throws RemoteException;
+	public void setSousCatalogue(SousCatalogueFacade sousCatalogue) throws RemoteException;
+	public long getIdOrdinateur() throws RemoteException;
+	public void setIdOrdinateur(long idOrdinateur) throws RemoteException;
 }
