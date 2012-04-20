@@ -11,9 +11,8 @@ import java.rmi.registry.Registry;
 public class Scenario {
 	
 	public static void main(String[] args) {
-		Ordinateur ord1;
 		try {
-			ord1 = new Ordinateur();
+			Ordinateur ord1 = new Ordinateur();
 			Ordinateur ord2 = new Ordinateur();
 			Ordinateur ord3 = new Ordinateur();
 			

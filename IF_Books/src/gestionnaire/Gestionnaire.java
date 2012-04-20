@@ -252,8 +252,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public Set<LivreFacade> rechercherParNomAuteur(String nomAuteur)
-			throws RemoteException {
+	public Set<LivreFacade> rechercherParNomAuteur(String nomAuteur)throws RemoteException {
 		Set<LivreFacade> res = new HashSet<LivreFacade>();
 		Auteur aut = null;
 		for (Auteur a : store.getAuteurs()){
@@ -267,7 +266,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return res;
 	}
 
-	@Override
+	/*@Override
 	public Map<Long,LivreFacade> rechercherParCategorie (String nomCategorie)throws RemoteException{
 		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
 		Catalogue catalogue = store.getCatalogue();
@@ -277,7 +276,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 				res.putAll(sc.getLivres());
 		}
 		return res;
-	}
+	}*/
 
 	@Override
 	public AuteurFacade rechercherAuteurParNom(String nomAuteur) throws RemoteException{
@@ -300,7 +299,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}*/
 
 	@Override
-	public int find() {
+	public int find() throws RemoteException {
 		return 1;
 	}
 }
