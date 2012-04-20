@@ -32,6 +32,8 @@ public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
 			
 			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");
 			gest.subscribe(this);
+			
+			//gest.find();
 		} catch (Exception e) { 
 			e.printStackTrace(); 
 		} 

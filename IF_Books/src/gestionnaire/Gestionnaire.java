@@ -2,17 +2,11 @@ package gestionnaire;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
-
-import facade.AuteurFacade;
-import facade.ClientFacade;
-import facade.CommandeFacade;
-import facade.LivreFacade;
+import java.util.Set;
 
 import pojo.Auteur;
 import pojo.BookStore;
@@ -21,6 +15,10 @@ import pojo.Client;
 import pojo.Commande;
 import pojo.Livre;
 import pojo.SousCatalogue;
+import facade.AuteurFacade;
+import facade.ClientFacade;
+import facade.CommandeFacade;
+import facade.LivreFacade;
 
 /* Observee */
 public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
@@ -252,7 +250,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public Set<LivreFacade> rechercherParNomAuteur(String nomAuteur)throws RemoteException {
+	public Set<LivreFacade> rechercherParNomAuteur(String nomAuteur) throws RemoteException {
 		Set<LivreFacade> res = new HashSet<LivreFacade>();
 		Auteur aut = null;
 		for (Auteur a : store.getAuteurs()){
@@ -264,6 +262,11 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		if(aut != null)
 			res.addAll(aut.getLivres());
 		return res;
+	}
+
+	@Override
+	public int chercher() throws RemoteException {
+		return 0;
 	}
 
 	/*@Override
@@ -278,7 +281,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return res;
 	}*/
 
-	@Override
+	/*@Override
 	public AuteurFacade rechercherAuteurParNom(String nomAuteur) throws RemoteException{
 		for (Auteur a : store.getAuteurs()){
 			if (a.getNom().contains(nomAuteur)){
@@ -286,7 +289,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 			}
 		}
 		return null;
-	}
+	}*/
 
 	/*@Override
 	public AuteurFacade find(String nom) throws RemoteException {
@@ -298,8 +301,9 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		return null;
 	}*/
 
-	@Override
+	/*@Override
 	public int find() throws RemoteException {
+		System.out.println("aaaaa");
 		return 1;
-	}
+	}*/
 }
