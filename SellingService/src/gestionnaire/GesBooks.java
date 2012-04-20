@@ -11,8 +11,6 @@ import java.util.Map.Entry;
 
 import javax.xml.rpc.ServiceException;
 
-import devise.ConversionDevise;
-import devise.ConversionDeviseServiceLocator;
 import facade.ClientFacade;
 import facade.LivreFacade;
 
@@ -51,7 +49,6 @@ public class GesBooks {
 			bankService = (ConversionDevise) new ConversionDeviseServiceLocator().getConversionDevise();
 			paiementService = (PaiementService) new PaiementServiceServiceLocator().getPaiementService();
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

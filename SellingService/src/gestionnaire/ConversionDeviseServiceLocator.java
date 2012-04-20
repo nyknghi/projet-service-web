@@ -5,9 +5,9 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package devise;
+package gestionnaire;
 
-public class ConversionDeviseServiceLocator extends org.apache.axis.client.Service implements devise.ConversionDeviseService {
+public class ConversionDeviseServiceLocator extends org.apache.axis.client.Service implements gestionnaire.ConversionDeviseService {
 
     public ConversionDeviseServiceLocator() {
     }
@@ -39,7 +39,7 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
         ConversionDeviseWSDDServiceName = name;
     }
 
-    public devise.ConversionDevise getConversionDevise() throws javax.xml.rpc.ServiceException {
+    public gestionnaire.ConversionDevise getConversionDevise() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(ConversionDevise_address);
@@ -50,9 +50,9 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
         return getConversionDevise(endpoint);
     }
 
-    public devise.ConversionDevise getConversionDevise(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public gestionnaire.ConversionDevise getConversionDevise(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            devise.ConversionDeviseSoapBindingStub _stub = new devise.ConversionDeviseSoapBindingStub(portAddress, this);
+            gestionnaire.ConversionDeviseSoapBindingStub _stub = new gestionnaire.ConversionDeviseSoapBindingStub(portAddress, this);
             _stub.setPortName(getConversionDeviseWSDDServiceName());
             return _stub;
         }
@@ -72,8 +72,8 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (devise.ConversionDevise.class.isAssignableFrom(serviceEndpointInterface)) {
-                devise.ConversionDeviseSoapBindingStub _stub = new devise.ConversionDeviseSoapBindingStub(new java.net.URL(ConversionDevise_address), this);
+            if (gestionnaire.ConversionDevise.class.isAssignableFrom(serviceEndpointInterface)) {
+                gestionnaire.ConversionDeviseSoapBindingStub _stub = new gestionnaire.ConversionDeviseSoapBindingStub(new java.net.URL(ConversionDevise_address), this);
                 _stub.setPortName(getConversionDeviseWSDDServiceName());
                 return _stub;
             }
@@ -105,7 +105,7 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://devise", "ConversionDeviseService");
+        return new javax.xml.namespace.QName("http://gestionnaire", "ConversionDeviseService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://devise", "ConversionDevise"));
+            ports.add(new javax.xml.namespace.QName("http://gestionnaire", "ConversionDevise"));
         }
         return ports.iterator();
     }

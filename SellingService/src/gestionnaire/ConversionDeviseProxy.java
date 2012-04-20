@@ -1,8 +1,8 @@
-package devise;
+package gestionnaire;
 
-public class ConversionDeviseProxy implements devise.ConversionDevise {
+public class ConversionDeviseProxy implements gestionnaire.ConversionDevise {
   private String _endpoint = null;
-  private devise.ConversionDevise conversionDevise = null;
+  private gestionnaire.ConversionDevise conversionDevise = null;
   
   public ConversionDeviseProxy() {
     _initConversionDeviseProxy();
@@ -15,7 +15,7 @@ public class ConversionDeviseProxy implements devise.ConversionDevise {
   
   private void _initConversionDeviseProxy() {
     try {
-      conversionDevise = (new devise.ConversionDeviseServiceLocator()).getConversionDevise();
+      conversionDevise = (new gestionnaire.ConversionDeviseServiceLocator()).getConversionDevise();
       if (conversionDevise != null) {
         if (_endpoint != null)
           ((javax.xml.rpc.Stub)conversionDevise)._setProperty("javax.xml.rpc.service.endpoint.address", _endpoint);
@@ -38,7 +38,7 @@ public class ConversionDeviseProxy implements devise.ConversionDevise {
     
   }
   
-  public devise.ConversionDevise getConversionDevise() {
+  public gestionnaire.ConversionDevise getConversionDevise() {
     if (conversionDevise == null)
       _initConversionDeviseProxy();
     return conversionDevise;

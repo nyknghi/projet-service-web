@@ -44,10 +44,16 @@ public class PaiementServiceProxy implements gestionnaire.PaiementService {
     return paiementService;
   }
   
-  public void effectuerPaiement(long idClient, long idCommande) throws java.rmi.RemoteException{
+  public void connecter() throws java.rmi.RemoteException{
     if (paiementService == null)
       _initPaiementServiceProxy();
-    paiementService.effectuerPaiement(idClient, idCommande);
+    paiementService.connecter();
+  }
+  
+  public boolean isFondsDispo(long idClient, double montant) throws java.rmi.RemoteException{
+    if (paiementService == null)
+      _initPaiementServiceProxy();
+    return paiementService.isFondsDispo(idClient, montant);
   }
   
   public boolean checkCommande(long idClient, long idCommande) throws java.rmi.RemoteException{
@@ -56,10 +62,10 @@ public class PaiementServiceProxy implements gestionnaire.PaiementService {
     return paiementService.checkCommande(idClient, idCommande);
   }
   
-  public boolean isFondsDispo(long idClient, double montant) throws java.rmi.RemoteException{
+  public void effectuerPaiement(long idClient, long idCommande) throws java.rmi.RemoteException{
     if (paiementService == null)
       _initPaiementServiceProxy();
-    return paiementService.isFondsDispo(idClient, montant);
+    paiementService.effectuerPaiement(idClient, idCommande);
   }
   
   
