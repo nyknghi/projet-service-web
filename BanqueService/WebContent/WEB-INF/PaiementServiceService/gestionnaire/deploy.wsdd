@@ -10,19 +10,21 @@
       <parameter name="className" value="gestionnaire.PaiementService"/>
       <parameter name="wsdlPortType" value="PaiementService"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://gestionnaire" name="effectuerPaiement" qname="operNS:effectuerPaiement" soapAction="">
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCommande" type="tns:long"/>
-      </operation>
-      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkCommande" qname="operNS:checkCommande" returnQName="retNS:checkCommandeReturn" returnType="rtns:boolean" soapAction="">
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCommande" type="tns:long"/>
+      <operation xmlns:operNS="http://gestionnaire" name="connecter" qname="operNS:connecter" soapAction="">
       </operation>
       <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="isFondsDispo" qname="operNS:isFondsDispo" returnQName="retNS:isFondsDispoReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:montant" type="tns:double"/>
       </operation>
-      <parameter name="allowedMethods" value="checkCommande effectuerPaiement isFondsDispo"/>
+      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkCommande" qname="operNS:checkCommande" returnQName="retNS:checkCommandeReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCommande" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://gestionnaire" name="effectuerPaiement" qname="operNS:effectuerPaiement" soapAction="">
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idCommande" type="tns:long"/>
+      </operation>
+      <parameter name="allowedMethods" value="checkCommande effectuerPaiement isFondsDispo connecter"/>
 
   </service>
 </deployment>
