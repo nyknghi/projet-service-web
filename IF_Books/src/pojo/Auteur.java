@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import facade.AuteurFacade;
+import facade.LivreFacade;
 
 public class Auteur extends Client implements AuteurFacade{
 	private static final long serialVersionUID = 1L;
@@ -67,5 +68,12 @@ public class Auteur extends Client implements AuteurFacade{
 	
 	public void removeLivre(long idLivre){
 		this.livres.remove(idLivre);
+	}
+
+	@Override
+	public Set<LivreFacade> getLivreFacade() {
+		Set<LivreFacade> res = new HashSet<LivreFacade>();
+		res.addAll(getLivres());
+		return res;
 	}
 }

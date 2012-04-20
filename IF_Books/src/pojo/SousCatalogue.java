@@ -53,7 +53,6 @@ public class SousCatalogue extends UnicastRemoteObject{
 		for(Entry <Long, Livre> entry : livres.entrySet()) {
 			Livre liv = entry.getValue();
 			if (liv.getTitre().contains(titre)){
-				System.out.println("Herre!!!");
 				res.put(liv.getIdLivre(), liv);
 			}
 		}

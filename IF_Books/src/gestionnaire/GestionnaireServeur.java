@@ -19,7 +19,9 @@ public class GestionnaireServeur {
 				System.setSecurityManager(new RMISecurityManager());
 						
 			gest = new Gestionnaire();
-			gest.ajouterClient(1,"tata","toto", "toto", "CLIENT");
+			//gest.ajouterClient(1,"tata","toto", "toto", "CLIENT");
+			gest.ajouterClient(2,"tata","toto", "toto", "AUTEUR");
+			gest.ajouterAuteur(2, "tata");
 			r.rebind("rmi://localhost/GestionnaireServeur", gest);
 			System.out.println("Server started !");
 		}

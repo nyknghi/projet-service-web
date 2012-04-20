@@ -2,7 +2,9 @@ package gestionnaire;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import facade.AuteurFacade;
 import facade.ClientFacade;
@@ -18,7 +20,9 @@ public interface IGestionnaire extends Remote{
 	public LivreFacade rechercherParId(long idLivre) throws RemoteException;
 	public Map<Long,LivreFacade> rechercherParTitre (String titre) throws RemoteException;
 	public Map<Long,LivreFacade> rechercherParAuteur (long idAuteur) throws RemoteException;
-	public boolean estDisponible(long idLivre) throws RemoteException; 
+	public Set<LivreFacade> rechercherParNomAuteur (String nomAuteur) throws RemoteException;
+	public Map<Long,LivreFacade> rechercherParCategorie (String nomCategorie) throws RemoteException;
+	public boolean estDisponible(long idLivre) throws RemoteException;
 	
 	public ClientFacade ajouterClient (long idClient, String nom, String login, String mdp, String type) throws RemoteException;
 	
@@ -33,6 +37,9 @@ public interface IGestionnaire extends Remote{
 	public long getLastKeyClient() throws RemoteException;
 	public long getLastKeyAuteur() throws RemoteException;
 	public AuteurFacade rechercherAuteurParId(long idAuteur) throws RemoteException;
+	
+	public AuteurFacade rechercherAuteurParNom(String nomAuteur) throws RemoteException;
+	
 	public AuteurFacade rechercherAuteurParLogin(String login, String pwd) throws RemoteException;
 	public ClientFacade rechercherClientParLogin(String login, String pwd) throws RemoteException;
 	
@@ -43,4 +50,6 @@ public interface IGestionnaire extends Remote{
 	// Connexion des ordinateurs
 	public void subscribe (IOrdinateur ord) throws RemoteException;
 	public void unsubscribe (IOrdinateur ord) throws RemoteException;
+	
+	public int find() throws RemoteException;
 }

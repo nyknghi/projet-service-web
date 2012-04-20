@@ -2,6 +2,7 @@ package gestionnaire;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -248,5 +249,58 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		Commande com = (Commande) rechercherCommande(id);
 		com.annuler();
 		return com;
+	}
+
+	@Override
+	public Set<LivreFacade> rechercherParNomAuteur(String nomAuteur)
+			throws RemoteException {
+		Set<LivreFacade> res = new HashSet<LivreFacade>();
+		Auteur aut = null;
+		for (Auteur a : store.getAuteurs()){
+			if (a.getNom().contains(nomAuteur)){
+				aut = a;
+				break;
+			}
+		}
+		if(aut != null)
+			res.addAll(aut.getLivres());
+		return res;
+	}
+
+	@Override
+	public Map<Long,LivreFacade> rechercherParCategorie (String nomCategorie)throws RemoteException{
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		Catalogue catalogue = store.getCatalogue();
+		Set<SousCatalogue> sousCat = catalogue.getSous_cat();
+		for (SousCatalogue sc : sousCat){
+			if(sc.getIntitule().contains(nomCategorie))
+				res.putAll(sc.getLivres());
+		}
+		return res;
+	}
+
+	@Override
+	public AuteurFacade rechercherAuteurParNom(String nomAuteur) throws RemoteException{
+		for (Auteur a : store.getAuteurs()){
+			if (a.getNom().contains(nomAuteur)){
+				return a;
+			}
+		}
+		return null;
+	}
+
+	/*@Override
+	public AuteurFacade find(String nom) throws RemoteException {
+		for (Auteur a : store.getAuteurs()){
+			if (a.getNom().contains(nom)){
+				return a;
+			}
+		}
+		return null;
+	}*/
+
+	@Override
+	public int find() {
+		return 1;
 	}
 }
