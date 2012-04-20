@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import javax.xml.rpc.ServiceException;
 
+import devise.ConversionDevise;
 import devise.ConversionDeviseServiceLocator;
 import facade.LivreFacade;
 
@@ -118,5 +119,9 @@ public class GesBooks {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean connexion(String login, String pwd){
+		
 	}
 }
