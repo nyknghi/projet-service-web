@@ -1,5 +1,9 @@
-#Fri Apr 20 20:54:37 CEST 2012
+#Fri Apr 20 21:02:46 CEST 2012
 eclipse.preferences.version=1
+encoding//src/devise/ConversionDevise.java=UTF-8
+encoding//src/devise/ConversionDeviseService.java=UTF-8
+encoding//src/devise/ConversionDeviseServiceLocator.java=UTF-8
+encoding//src/devise/ConversionDeviseSoapBindingStub.java=UTF-8
 encoding//src/gestionnaire/PaiementService.java=UTF-8
 encoding//src/gestionnaire/PaiementServiceService.java=UTF-8
 encoding//src/gestionnaire/PaiementServiceServiceLocator.java=UTF-8

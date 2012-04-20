@@ -13,6 +13,7 @@ import javax.xml.rpc.ServiceException;
 
 import devise.ConversionDevise;
 import devise.ConversionDeviseServiceLocator;
+import facade.ClientFacade;
 import facade.LivreFacade;
 
 public class GesBooks {
@@ -23,6 +24,7 @@ public class GesBooks {
 	static PaiementService paiementService;
 	static Map <Integer, Long> panier = new HashMap<Integer, Long>();
 	static String deviseEncours;
+	static ClientFacade client;
 
 	public String getDeviseEncours() {
 		return deviseEncours;
@@ -122,6 +124,18 @@ public class GesBooks {
 	}
 	
 	public boolean connexion(String login, String pwd){
-		
+		try {
+			connecter();
+			client = gest.rechercherClientParLogin(login, pwd);
+			if(client != null){
+				return true;
+			}
+			else{
+				return false;
+			}
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }

@@ -10,6 +10,12 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="viderPanierResponse">
     <complexType/>
    </element>
+   <element name="connecter">
+    <complexType/>
+   </element>
+   <element name="connecterResponse">
+    <complexType/>
+   </element>
    <element name="prixDuLivre">
     <complexType>
      <sequence>
@@ -24,30 +30,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="effectuerPaiement">
-    <complexType>
-     <sequence>
-      <element name="idClient" type="xsd:long"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="effectuerPaiementResponse">
-    <complexType>
-     <sequence>
-      <element name="effectuerPaiementReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="ajouterLivrePanier">
-    <complexType>
-     <sequence>
-      <element name="idLivre" type="xsd:long"/>
-      <element name="qteACommande" type="xsd:int"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="ajouterLivrePanierResponse">
+   <element name="getDeviseEncours">
     <complexType/>
+   </element>
+   <element name="getDeviseEncoursResponse">
+    <complexType>
+     <sequence>
+      <element name="getDeviseEncoursReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
    </element>
    <element name="setDeviseEncours">
     <complexType>
@@ -73,15 +64,16 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="getDeviseEncours">
-    <complexType/>
-   </element>
-   <element name="getDeviseEncoursResponse">
+   <element name="ajouterLivrePanier">
     <complexType>
      <sequence>
-      <element name="getDeviseEncoursReturn" type="xsd:string"/>
+      <element name="idLivre" type="xsd:long"/>
+      <element name="qteACommande" type="xsd:int"/>
      </sequence>
     </complexType>
+   </element>
+   <element name="ajouterLivrePanierResponse">
+    <complexType/>
    </element>
    <element name="suppLivreDansPanier">
     <complexType>
@@ -93,11 +85,34 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <element name="suppLivreDansPanierResponse">
     <complexType/>
    </element>
-   <element name="connecter">
-    <complexType/>
+   <element name="effectuerPaiement">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
    </element>
-   <element name="connecterResponse">
-    <complexType/>
+   <element name="effectuerPaiementResponse">
+    <complexType>
+     <sequence>
+      <element name="effectuerPaiementReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="connexion">
+    <complexType>
+     <sequence>
+      <element name="login" type="xsd:string"/>
+      <element name="pwd" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="connexionResponse">
+    <complexType>
+     <sequence>
+      <element name="connexionReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
    </element>
   </schema>
  </wsdl:types>
@@ -118,17 +133,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="prixDuLivreResponse">
+   <wsdl:message name="connexionResponse">
 
-      <wsdl:part element="impl:prixDuLivreResponse" name="parameters">
+      <wsdl:part element="impl:connexionResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="viderPanierRequest">
+   <wsdl:message name="prixDuLivreResponse">
 
-      <wsdl:part element="impl:viderPanier" name="parameters">
+      <wsdl:part element="impl:prixDuLivreResponse" name="parameters">
 
       </wsdl:part>
 
@@ -142,9 +157,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="viderPanierRequest">
+
+      <wsdl:part element="impl:viderPanier" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="setDeviseEncoursResponse">
 
       <wsdl:part element="impl:setDeviseEncoursResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="connexionRequest">
+
+      <wsdl:part element="impl:connexion" name="parameters">
 
       </wsdl:part>
 
@@ -158,17 +189,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="ajouterLivrePanierRequest">
+   <wsdl:message name="setDeviseEncoursRequest">
 
-      <wsdl:part element="impl:ajouterLivrePanier" name="parameters">
+      <wsdl:part element="impl:setDeviseEncours" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="setDeviseEncoursRequest">
+   <wsdl:message name="ajouterLivrePanierRequest">
 
-      <wsdl:part element="impl:setDeviseEncours" name="parameters">
+      <wsdl:part element="impl:ajouterLivrePanier" name="parameters">
 
       </wsdl:part>
 
@@ -260,6 +291,18 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="connecter">
+
+         <wsdl:input message="impl:connecterRequest" name="connecterRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:connecterResponse" name="connecterResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="prixDuLivre">
 
          <wsdl:input message="impl:prixDuLivreRequest" name="prixDuLivreRequest">
@@ -272,25 +315,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="effectuerPaiement">
+      <wsdl:operation name="getDeviseEncours">
 
-         <wsdl:input message="impl:effectuerPaiementRequest" name="effectuerPaiementRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:effectuerPaiementResponse" name="effectuerPaiementResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="ajouterLivrePanier">
-
-         <wsdl:input message="impl:ajouterLivrePanierRequest" name="ajouterLivrePanierRequest">
+         <wsdl:input message="impl:getDeviseEncoursRequest" name="getDeviseEncoursRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:ajouterLivrePanierResponse" name="ajouterLivrePanierResponse">
+         <wsdl:output message="impl:getDeviseEncoursResponse" name="getDeviseEncoursResponse">
 
        </wsdl:output>
 
@@ -320,13 +351,13 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getDeviseEncours">
+      <wsdl:operation name="ajouterLivrePanier">
 
-         <wsdl:input message="impl:getDeviseEncoursRequest" name="getDeviseEncoursRequest">
+         <wsdl:input message="impl:ajouterLivrePanierRequest" name="ajouterLivrePanierRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getDeviseEncoursResponse" name="getDeviseEncoursResponse">
+         <wsdl:output message="impl:ajouterLivrePanierResponse" name="ajouterLivrePanierResponse">
 
        </wsdl:output>
 
@@ -344,13 +375,25 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="connecter">
+      <wsdl:operation name="effectuerPaiement">
 
-         <wsdl:input message="impl:connecterRequest" name="connecterRequest">
+         <wsdl:input message="impl:effectuerPaiementRequest" name="effectuerPaiementRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:connecterResponse" name="connecterResponse">
+         <wsdl:output message="impl:effectuerPaiementResponse" name="effectuerPaiementResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connexion">
+
+         <wsdl:input message="impl:connexionRequest" name="connexionRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:connexionResponse" name="connexionResponse">
 
        </wsdl:output>
 
@@ -380,6 +423,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="connecter">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="connecterRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="connecterResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="prixDuLivre">
 
          <wsdlsoap:operation soapAction=""/>
@@ -398,35 +459,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="effectuerPaiement">
+      <wsdl:operation name="getDeviseEncours">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="effectuerPaiementRequest">
+         <wsdl:input name="getDeviseEncoursRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="effectuerPaiementResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="ajouterLivrePanier">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="ajouterLivrePanierRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="ajouterLivrePanierResponse">
+         <wsdl:output name="getDeviseEncoursResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -470,17 +513,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getDeviseEncours">
+      <wsdl:operation name="ajouterLivrePanier">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="getDeviseEncoursRequest">
+         <wsdl:input name="ajouterLivrePanierRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="getDeviseEncoursResponse">
+         <wsdl:output name="ajouterLivrePanierResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -506,17 +549,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="connecter">
+      <wsdl:operation name="effectuerPaiement">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="connecterRequest">
+         <wsdl:input name="effectuerPaiementRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="connecterResponse">
+         <wsdl:output name="effectuerPaiementResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="connexion">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="connexionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="connexionResponse">
 
             <wsdlsoap:body use="literal"/>
 
