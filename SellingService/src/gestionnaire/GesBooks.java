@@ -17,7 +17,7 @@ import facade.LivreFacade;
 public class GesBooks {
 
 	public GesBooks() {	}
-	static  IGestionnaire gest;
+	static IGestionnaire gest;
 	static ConversionDevise bankService;
 	static PaiementService paiementService;
 	static Map <Integer, Long> panier = new HashMap<Integer, Long>();
@@ -33,7 +33,7 @@ public class GesBooks {
 	}
 
 	public static void connecter(){
-
+		System.setProperty("java.security.policy", "C:/Users/Eric/Documents/ProjetWebService/IF_Books/src/sec.policy");
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());
 		try {

@@ -12,7 +12,7 @@ import facade.LivreFacade;
 
 public interface IGestionnaire extends Remote{
 	public void ajouterAuteur(long id, String nom) throws RemoteException;
-	public void ajouterSousCatalogue(long idCat, String intitule) throws RemoteException;
+	public void ajouterSousCatalogue(long idCat, String intitule, long idOrdinateur) throws RemoteException;
 	
 	public void ajouterLivre (long id, String titre, int nbDisponibles, double prix, long idAuteur, long idCatalogue) throws RemoteException;
 	public void supprimerLivre (long idLivre) throws RemoteException;
@@ -43,6 +43,11 @@ public interface IGestionnaire extends Remote{
 	public void envoyerManuscrit(long idAuteur, long idLivre, long idSousCatalogue) throws RemoteException;
 	public void modifierLivre(long idAuteur, long idLivre) throws RemoteException;
 	public void validerManuscrit(long idLivre) throws RemoteException;
+	
+	// Connexion des ordinateurs
+	public void subscribe (IOrdinateur ord) throws RemoteException;
+	public void unsubscribe (IOrdinateur ord) throws RemoteException;
+	public IOrdinateur rechercherOrdinateur (long idOrd) throws RemoteException;
 	
 	public int chercher() throws RemoteException;
 	
