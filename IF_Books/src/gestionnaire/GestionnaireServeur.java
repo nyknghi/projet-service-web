@@ -17,11 +17,11 @@ public class GestionnaireServeur {
 	public GestionnaireServeur(){
 		Util.execPath();
 		try {
-			/*Util.PATH_USER_DIR=System.getProperty("user.dir");
+			Util.PATH_USER_DIR=System.getProperty("user.dir");
 			System.setProperty("java.security.policy", Util.PATH_POLICY);
 			System.setProperty("java.rmi.server.codebase", Util.PATH_CODEBASE);
 			System.out.println(Util.PATH_CODEBASE);
-		*/
+		
 			Registry r = LocateRegistry.getRegistry();		
 			
 			if (System.getSecurityManager() == null) 
@@ -56,19 +56,22 @@ public class GestionnaireServeur {
 	
 	public void creerBD() throws RemoteException{
 		gest.ajouterSousCatalogue(1, "Gestion", 1);
+		gest.ajouterSousCatalogue(2, "Informatique", 2);
+		
 		gest.ajouterAuteur(1, "AAA");
-		
-		gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1);
-		gest.ajouterLivre(2, "Economie", 3, 15.5, 1, 1);
-		
-		gest.ajouterClient(2,"tata","toto", "toto", "AUTEUR");
 		gest.ajouterAuteur(2, "tata");
+		
+		gest.ajouterLivre(1, "Finance d'entreprise", 3, 25.0, 1, 1);
+		gest.ajouterLivre(2, "Crise financiere et Balse III", 3, 15.5, 1, 1);
+		gest.ajouterLivre(3, "Programmation C++", 5, 12.0, 2, 2);
 		
 		LivreFacade finance = (LivreFacade) gest.rechercherParId(new Long(1));
 		LivreFacade eco = (LivreFacade) gest.rechercherParId(new Long(2));
+		LivreFacade info = (LivreFacade) gest.rechercherParId(new Long(3));
 		
 		System.out.println(finance.afficher());
 		System.out.println(eco.afficher());
+		System.out.println(info.afficher());
 		
 		// Creation d'une commande
 		 
@@ -86,13 +89,6 @@ public class GestionnaireServeur {
 		
 		System.out.println("Compte client : " + client.getFonds());
 		System.out.println("Montant achat : " + montantAchat);
-		//System.out.println(checkCommande(new Long(1), new Long(1)));
-		
-		
-		// Regler commande
-		 
-		//effectuerPaiement(new Long(1), new Long(1));
-		//System.out.println("Nouveau Compte client : " + client.getFonds());
-		
 	}
 }
+

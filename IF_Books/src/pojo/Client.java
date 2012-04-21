@@ -4,8 +4,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import facade.ClientFacade;
+import facade.CommandeFacade;
+import facade.LivreFacade;
 
 public class Client extends UnicastRemoteObject implements ClientFacade{
 	private static final long serialVersionUID = 1L;
@@ -33,8 +36,12 @@ public class Client extends UnicastRemoteObject implements ClientFacade{
 		fonds += montant;
 	}
 	
-	public void payer(double montant){
+	public void payer(CommandeFacade commande, double montant) throws RemoteException{
 		fonds -= montant;
+		for(Entry <Integer, LivreFacade> entry : commande.getLivres().entrySet()) {
+			LivreFacade liv = entry.getValue();
+			liv.setNbDisponibles(liv.getNbDisponibles()-entry.getKey());
+		}
 	}
 	
 	public long getIdClient() {
