@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -23,15 +23,19 @@
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:service name="PaiementService" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="effectuerPaiement" qname="ns1:effectuerPaiement" soapAction="" xmlns:ns1="http://gestionnaire" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns2:parameter qname="ns1:idCommande" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns2:operation name="isFondsDispo" qname="ns1:isFondsDispo" returnQName="ns1:isFondsDispoReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:idClient" type="xsd:long"/>
+   <ns2:parameter qname="ns1:montant" type="xsd:double"/>
   </ns2:operation>
-  <ns1:operation name="checkCommande" qname="ns2:checkCommande" returnQName="ns2:checkCommandeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns2="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns2:idClient" type="xsd:long"/>
-   <ns1:parameter qname="ns2:idCommande" type="xsd:long"/>
+  <ns1:operation name="effectuerPaiement" qname="ns2:effectuerPaiement" soapAction="" xmlns:ns2="http://gestionnaire">
+   <ns1:parameter qname="ns2:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns2:idCommande" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="checkCommande effectuerPaiement"/>
+  <ns1:operation name="checkCommande" qname="ns3:checkCommande" returnQName="ns3:checkCommandeReturn" returnType="xsd:boolean" soapAction="" xmlns:ns3="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:idClient" type="xsd:long"/>
+   <ns1:parameter qname="ns3:idCommande" type="xsd:long"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="checkCommande effectuerPaiement isFondsDispo"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="PaiementService"/>
   <ns1:parameter name="className" value="gestionnaire.PaiementService"/>
@@ -51,19 +55,19 @@
   <ns1:parameter name="className" value="org.apache.axis.Version"/>
  </ns1:service>
  <ns1:service name="ConversionDevise" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="convertir" qname="ns3:convertir" returnQName="ns3:convertirReturn" returnType="xsd:double" soapAction="" xmlns:ns3="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns3:source" type="xsd:string"/>
-   <ns1:parameter qname="ns3:cible" type="xsd:string"/>
-   <ns1:parameter qname="ns3:montant" type="xsd:double"/>
+  <ns1:operation name="convertir" qname="ns4:convertir" returnQName="ns4:convertirReturn" returnType="xsd:double" soapAction="" xmlns:ns4="http://gestionnaire" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns4:source" type="xsd:string"/>
+   <ns1:parameter qname="ns4:cible" type="xsd:string"/>
+   <ns1:parameter qname="ns4:montant" type="xsd:double"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="convertir"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="wsdlPortType" value="ConversionDevise"/>
-  <ns1:parameter name="className" value="gestionnaire.ConversionDevise"/>
   <ns1:parameter name="wsdlServicePort" value="ConversionDevise"/>
   <ns1:parameter name="schemaQualified" value="http://gestionnaire"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://gestionnaire"/>
+  <ns1:parameter name="className" value="gestionnaire.ConversionDevise"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="allowedMethods" value="convertir"/>
   <ns1:parameter name="wsdlServiceElement" value="ConversionDeviseService"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://gestionnaire"/>
+  <ns1:parameter name="wsdlPortType" value="ConversionDevise"/>
   <ns1:parameter name="scope" value="session"/>
  </ns1:service>
  <ns1:transport name="http">
