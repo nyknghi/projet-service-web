@@ -10,36 +10,36 @@
       <parameter name="className" value="gestionnaire.GesBooks"/>
       <parameter name="wsdlPortType" value="GesBooks"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation xmlns:operNS="http://gestionnaire" name="connecter" qname="operNS:connecter" soapAction="">
-      </operation>
-      <operation xmlns:operNS="http://gestionnaire" name="viderPanier" qname="operNS:viderPanier" soapAction="">
-      </operation>
-      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="prixDuLivre" qname="operNS:prixDuLivre" returnQName="retNS:prixDuLivreReturn" returnType="rtns:double" soapAction="">
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idLivre" type="tns:long"/>
-      </operation>
       <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="connexion" qname="operNS:connexion" returnQName="retNS:connexionReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:login" type="tns:string"/>
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:pwd" type="tns:string"/>
       </operation>
+      <operation xmlns:operNS="http://gestionnaire" name="connecter" qname="operNS:connecter" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="prixDuLivre" qname="operNS:prixDuLivre" returnQName="retNS:prixDuLivreReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idLivre" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://gestionnaire" name="viderPanier" qname="operNS:viderPanier" soapAction="">
+      </operation>
       <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="effectuerPaiement" qname="operNS:effectuerPaiement" returnQName="retNS:effectuerPaiementReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
       </operation>
-      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDeviseEncours" qname="operNS:getDeviseEncours" returnQName="retNS:getDeviseEncoursReturn" returnType="rtns:string" soapAction="">
-      </operation>
-      <operation xmlns:operNS="http://gestionnaire" name="setDeviseEncours" qname="operNS:setDeviseEncours" soapAction="">
-        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:deviseEncours" type="tns:string"/>
-      </operation>
-      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="estDisponible" qname="operNS:estDisponible" returnQName="retNS:estDisponibleReturn" returnType="rtns:boolean" soapAction="">
+      <operation xmlns:operNS="http://gestionnaire" name="suppLivreDansPanier" qname="operNS:suppLivreDansPanier" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idLivre" type="tns:long"/>
       </operation>
       <operation xmlns:operNS="http://gestionnaire" name="ajouterLivrePanier" qname="operNS:ajouterLivrePanier" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idLivre" type="tns:long"/>
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:qteACommande" type="tns:int"/>
       </operation>
-      <operation xmlns:operNS="http://gestionnaire" name="suppLivreDansPanier" qname="operNS:suppLivreDansPanier" soapAction="">
+      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="estDisponible" qname="operNS:estDisponible" returnQName="retNS:estDisponibleReturn" returnType="rtns:boolean" soapAction="">
         <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idLivre" type="tns:long"/>
       </operation>
-      <parameter name="allowedMethods" value="connexion setDeviseEncours effectuerPaiement prixDuLivre suppLivreDansPanier estDisponible connecter ajouterLivrePanier getDeviseEncours viderPanier"/>
+      <operation xmlns:operNS="http://gestionnaire" xmlns:retNS="http://gestionnaire" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDeviseEncours" qname="operNS:getDeviseEncours" returnQName="retNS:getDeviseEncoursReturn" returnType="rtns:string" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://gestionnaire" name="setDeviseEncours" qname="operNS:setDeviseEncours" soapAction="">
+        <parameter xmlns:pns="http://gestionnaire" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:deviseEncours" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="connexion setDeviseEncours effectuerPaiement prixDuLivre suppLivreDansPanier estDisponible connecter getDeviseEncours ajouterLivrePanier viderPanier"/>
 
   </service>
 </deployment>
