@@ -117,7 +117,6 @@ public class Controller extends HttpServlet{
 			//bankService = (PaiementService) new PaiementServiceServiceLocator().getPaiementService();
 			sellingService = (GesBooks) new GesBooksServiceLocator().getGesBooks();
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
