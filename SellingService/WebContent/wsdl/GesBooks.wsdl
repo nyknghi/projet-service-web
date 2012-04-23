@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://gestionnaire" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://gestionnaire" xmlns:intf="http://gestionnaire" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions targetNamespace="http://gestionnaire" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://gestionnaire" xmlns:intf="http://gestionnaire" xmlns:tns1="http://facade" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://gestionnaire" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="connexion">
+   <import namespace="http://facade"/>
+   <element name="getDeviseEncours">
+    <complexType/>
+   </element>
+   <element name="getDeviseEncoursResponse">
     <complexType>
      <sequence>
-      <element name="login" type="xsd:string"/>
-      <element name="pwd" type="xsd:string"/>
+      <element name="getDeviseEncoursReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="connexionResponse">
+   <element name="setDeviseEncours">
     <complexType>
      <sequence>
-      <element name="connexionReturn" type="xsd:boolean"/>
+      <element name="deviseEncours" type="xsd:string"/>
      </sequence>
     </complexType>
+   </element>
+   <element name="setDeviseEncoursResponse">
+    <complexType/>
    </element>
    <element name="connecter">
     <complexType/>
@@ -39,6 +45,41 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <element name="estDisponible">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="estDisponibleResponse">
+    <complexType>
+     <sequence>
+      <element name="estDisponibleReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterLivrePanier">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+      <element name="qteACommande" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterLivrePanierResponse">
+    <complexType/>
+   </element>
+   <element name="suppLivreDansPanier">
+    <complexType>
+     <sequence>
+      <element name="idLivre" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="suppLivreDansPanierResponse">
+    <complexType/>
+   </element>
    <element name="viderPanier">
     <complexType/>
    </element>
@@ -59,61 +100,58 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="suppLivreDansPanier">
+   <element name="connexion">
     <complexType>
      <sequence>
-      <element name="idLivre" type="xsd:long"/>
+      <element name="login" type="xsd:string"/>
+      <element name="pwd" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="suppLivreDansPanierResponse">
+   <element name="connexionResponse">
+    <complexType>
+     <sequence>
+      <element name="connexionReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getClientInformation">
     <complexType/>
    </element>
-   <element name="ajouterLivrePanier">
+   <element name="getClientInformationResponse">
     <complexType>
      <sequence>
-      <element name="idLivre" type="xsd:long"/>
-      <element name="qteACommande" type="xsd:int"/>
+      <element maxOccurs="unbounded" name="getClientInformationReturn" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="ajouterLivrePanierResponse">
-    <complexType/>
-   </element>
-   <element name="estDisponible">
+   <element name="getFindsBooks">
     <complexType>
      <sequence>
-      <element name="idLivre" type="xsd:long"/>
+      <element name="title" type="xsd:string"/>
+      <element name="author" type="xsd:string"/>
+      <element name="categorie" type="xsd:string"/>
      </sequence>
     </complexType>
    </element>
-   <element name="estDisponibleResponse">
+   <element name="getFindsBooksResponse">
     <complexType>
      <sequence>
-      <element name="estDisponibleReturn" type="xsd:boolean"/>
+      <element maxOccurs="unbounded" name="getFindsBooksReturn" type="tns1:Books"/>
      </sequence>
     </complexType>
    </element>
-   <element name="getDeviseEncours">
-    <complexType/>
-   </element>
-   <element name="getDeviseEncoursResponse">
-    <complexType>
-     <sequence>
-      <element name="getDeviseEncoursReturn" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setDeviseEncours">
-    <complexType>
-     <sequence>
-      <element name="deviseEncours" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="setDeviseEncoursResponse">
-    <complexType/>
-   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://facade" xmlns="http://www.w3.org/2001/XMLSchema">
+   <complexType name="Books">
+    <sequence>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="nbDispo" type="xsd:int"/>
+     <element name="nomAuteur" nillable="true" type="xsd:string"/>
+     <element name="prix" type="xsd:double"/>
+     <element name="titre" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
   </schema>
  </wsdl:types>
 
@@ -149,9 +187,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="viderPanierRequest">
+   <wsdl:message name="getFindsBooksResponse">
 
-      <wsdl:part element="impl:viderPanier" name="parameters">
+      <wsdl:part element="impl:getFindsBooksResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getClientInformationResponse">
+
+      <wsdl:part element="impl:getClientInformationResponse" name="parameters">
 
       </wsdl:part>
 
@@ -160,6 +206,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
    <wsdl:message name="effectuerPaiementResponse">
 
       <wsdl:part element="impl:effectuerPaiementResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="viderPanierRequest">
+
+      <wsdl:part element="impl:viderPanier" name="parameters">
 
       </wsdl:part>
 
@@ -205,6 +259,14 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getFindsBooksRequest">
+
+      <wsdl:part element="impl:getFindsBooks" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:message name="connecterRequest">
 
       <wsdl:part element="impl:connecter" name="parameters">
@@ -237,17 +299,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
-   <wsdl:message name="ajouterLivrePanierResponse">
+   <wsdl:message name="suppLivreDansPanierResponse">
 
-      <wsdl:part element="impl:ajouterLivrePanierResponse" name="parameters">
+      <wsdl:part element="impl:suppLivreDansPanierResponse" name="parameters">
 
       </wsdl:part>
 
    </wsdl:message>
 
-   <wsdl:message name="suppLivreDansPanierResponse">
+   <wsdl:message name="ajouterLivrePanierResponse">
 
-      <wsdl:part element="impl:suppLivreDansPanierResponse" name="parameters">
+      <wsdl:part element="impl:ajouterLivrePanierResponse" name="parameters">
 
       </wsdl:part>
 
@@ -277,15 +339,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getClientInformationRequest">
+
+      <wsdl:part element="impl:getClientInformation" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
    <wsdl:portType name="GesBooks">
 
-      <wsdl:operation name="connexion">
+      <wsdl:operation name="getDeviseEncours">
 
-         <wsdl:input message="impl:connexionRequest" name="connexionRequest">
+         <wsdl:input message="impl:getDeviseEncoursRequest" name="getDeviseEncoursRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:connexionResponse" name="connexionResponse">
+         <wsdl:output message="impl:getDeviseEncoursResponse" name="getDeviseEncoursResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDeviseEncours">
+
+         <wsdl:input message="impl:setDeviseEncoursRequest" name="setDeviseEncoursRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:setDeviseEncoursResponse" name="setDeviseEncoursResponse">
 
        </wsdl:output>
 
@@ -315,6 +397,42 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="estDisponible">
+
+         <wsdl:input message="impl:estDisponibleRequest" name="estDisponibleRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:estDisponibleResponse" name="estDisponibleResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterLivrePanier">
+
+         <wsdl:input message="impl:ajouterLivrePanierRequest" name="ajouterLivrePanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajouterLivrePanierResponse" name="ajouterLivrePanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suppLivreDansPanier">
+
+         <wsdl:input message="impl:suppLivreDansPanierRequest" name="suppLivreDansPanierRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:suppLivreDansPanierResponse" name="suppLivreDansPanierResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="viderPanier">
 
          <wsdl:input message="impl:viderPanierRequest" name="viderPanierRequest">
@@ -339,61 +457,37 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="suppLivreDansPanier">
+      <wsdl:operation name="connexion">
 
-         <wsdl:input message="impl:suppLivreDansPanierRequest" name="suppLivreDansPanierRequest">
+         <wsdl:input message="impl:connexionRequest" name="connexionRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:suppLivreDansPanierResponse" name="suppLivreDansPanierResponse">
+         <wsdl:output message="impl:connexionResponse" name="connexionResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="ajouterLivrePanier">
+      <wsdl:operation name="getClientInformation">
 
-         <wsdl:input message="impl:ajouterLivrePanierRequest" name="ajouterLivrePanierRequest">
+         <wsdl:input message="impl:getClientInformationRequest" name="getClientInformationRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:ajouterLivrePanierResponse" name="ajouterLivrePanierResponse">
+         <wsdl:output message="impl:getClientInformationResponse" name="getClientInformationResponse">
 
        </wsdl:output>
 
       </wsdl:operation>
 
-      <wsdl:operation name="estDisponible">
+      <wsdl:operation name="getFindsBooks">
 
-         <wsdl:input message="impl:estDisponibleRequest" name="estDisponibleRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:estDisponibleResponse" name="estDisponibleResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getDeviseEncours">
-
-         <wsdl:input message="impl:getDeviseEncoursRequest" name="getDeviseEncoursRequest">
+         <wsdl:input message="impl:getFindsBooksRequest" name="getFindsBooksRequest">
 
        </wsdl:input>
 
-         <wsdl:output message="impl:getDeviseEncoursResponse" name="getDeviseEncoursResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="setDeviseEncours">
-
-         <wsdl:input message="impl:setDeviseEncoursRequest" name="setDeviseEncoursRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:setDeviseEncoursResponse" name="setDeviseEncoursResponse">
+         <wsdl:output message="impl:getFindsBooksResponse" name="getFindsBooksResponse">
 
        </wsdl:output>
 
@@ -405,17 +499,35 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="connexion">
+      <wsdl:operation name="getDeviseEncours">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="connexionRequest">
+         <wsdl:input name="getDeviseEncoursRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="connexionResponse">
+         <wsdl:output name="getDeviseEncoursResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="setDeviseEncours">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="setDeviseEncoursRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="setDeviseEncoursResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -459,6 +571,60 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
+      <wsdl:operation name="estDisponible">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="estDisponibleRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="estDisponibleResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterLivrePanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajouterLivrePanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajouterLivrePanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="suppLivreDansPanier">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="suppLivreDansPanierRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="suppLivreDansPanierResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
       <wsdl:operation name="viderPanier">
 
          <wsdlsoap:operation soapAction=""/>
@@ -495,17 +661,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="suppLivreDansPanier">
+      <wsdl:operation name="connexion">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="suppLivreDansPanierRequest">
+         <wsdl:input name="connexionRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="suppLivreDansPanierResponse">
+         <wsdl:output name="connexionResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -513,17 +679,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="ajouterLivrePanier">
+      <wsdl:operation name="getClientInformation">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="ajouterLivrePanierRequest">
+         <wsdl:input name="getClientInformationRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="ajouterLivrePanierResponse">
+         <wsdl:output name="getClientInformationResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -531,53 +697,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="estDisponible">
+      <wsdl:operation name="getFindsBooks">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="estDisponibleRequest">
+         <wsdl:input name="getFindsBooksRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="estDisponibleResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getDeviseEncours">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getDeviseEncoursRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getDeviseEncoursResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="setDeviseEncours">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="setDeviseEncoursRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="setDeviseEncoursResponse">
+         <wsdl:output name="getFindsBooksResponse">
 
             <wsdlsoap:body use="literal"/>
 

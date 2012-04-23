@@ -18,6 +18,8 @@ public interface IGestionnaire extends Remote{
 	public void supprimerLivre (long idLivre) throws RemoteException;
 	public LivreFacade rechercherParId(long idLivre) throws RemoteException;
 	public Map<Long,LivreFacade> rechercherParTitre (String titre) throws RemoteException;
+	public Map<Long,LivreFacade> rechercherParNomDeAuteur (String nomAuteur) throws RemoteException;
+	public Map<Long,LivreFacade> rechercherParNomDeCategorie (String categorie) throws RemoteException;
 	public Map<Long, LivreFacade> rechercherParAuteur (long idAuteur) throws RemoteException;
 	public Set<LivreFacade> rechercherParNomAuteur (String nomAuteur) throws RemoteException;
 	public boolean estDisponible(long idLivre) throws RemoteException;
