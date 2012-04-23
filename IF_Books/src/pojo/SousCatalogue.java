@@ -51,11 +51,29 @@ public class SousCatalogue extends UnicastRemoteObject implements SousCatalogueF
 		return res;
 	}
 	
+	public Map<Long,LivreFacade> getLivreByNomSousCat(String categorie) throws RemoteException{
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		if(this.getIntitule().contains(categorie))
+			return this.getLivres();
+		return res;
+	}
+	
 	public Map<Long,LivreFacade> getLivreByTitre(String titre) throws RemoteException{
 		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
 		for(Entry <Long, LivreFacade> entry : livres.entrySet()) {
 			LivreFacade liv = entry.getValue();
 			if (liv.getTitre().contains(titre)){
+				res.put(liv.getIdLivre(), liv);
+			}
+		}
+		return res;
+	}
+	
+	public Map<Long,LivreFacade> getLivreByNomAuteur(String nomAuteur) throws RemoteException{
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		for(Entry <Long, LivreFacade> entry : livres.entrySet()) {
+			LivreFacade liv = entry.getValue();
+			if (liv.getAuteur().getNom().contains(nomAuteur)){
 				res.put(liv.getIdLivre(), liv);
 			}
 		}

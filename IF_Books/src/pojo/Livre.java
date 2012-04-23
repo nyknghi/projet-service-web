@@ -32,6 +32,18 @@ public class Livre extends UnicastRemoteObject implements LivreFacade{
 		this.diffuse = false;
 	}
 	
+	public Livre(long id, String titre, int nbDisponibles, double prix, Auteur auteur, SousCatalogue catalogue, String description) throws RemoteException {
+		this.idLivre = id;
+		this.titre = titre;
+		this.nbDisponibles = nbDisponibles;
+		this.prix = prix;
+		this.auteur = auteur;
+		this.catalogue = catalogue;
+		this.datePublication = new Date();
+		this.diffuse = false;
+		this.description = description;
+	}
+	
 	public boolean isDisponible(){
 		return (nbDisponibles > 0);
 	}

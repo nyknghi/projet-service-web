@@ -43,7 +43,7 @@ public class Scenario {
 			gest.ajouterSousCatalogue(1, "Gestion", 1);
 			gest.ajouterAuteur(1, "AAA");
 			
-			gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1);
+			gest.ajouterLivre(1, "Finance", 3, 25.0, 1, 1,"Livre de test");
 			//LivreFacade livre =	(LivreFacade) gest.rechercherParTitre("Finance").get(0);
 			
 			//gest.rechercherParTitre("Finance");

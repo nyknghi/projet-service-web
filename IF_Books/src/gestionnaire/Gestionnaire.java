@@ -60,10 +60,10 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	
 	@Override
 	public void ajouterLivre(long id, String titre, int nbDisponibles, double prix,
-			long idAuteur, long idCatalogue) throws RemoteException {		
+			long idAuteur, long idCatalogue, String description) throws RemoteException {		
 		Auteur a = store.findAuteur(idAuteur);
 		SousCatalogue sc = store.getCatalogue().findSousCatalogue(idCatalogue);
-		Livre livre = new Livre(id, titre, nbDisponibles, prix, a, sc);
+		Livre livre = new Livre(id, titre, nbDisponibles, prix, a, sc, description);
 		
 		a.ajouterLivre(livre);
 		sc.ajouterLivre(livre);
@@ -104,6 +104,30 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 		for (SousCatalogue sc : sousCat){
 			res.putAll(sc.getLivreByTitre(titre));
 		}
+		return res;
+	}
+	
+	@Override
+	public Map<Long, LivreFacade> rechercherParNomDeAuteur(String nomAuteur) throws RemoteException {
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		Catalogue catalogue = store.getCatalogue();
+		Set<SousCatalogue> sousCat = catalogue.getSous_cat();
+		for (SousCatalogue sc : sousCat){
+			res.putAll(sc.getLivreByNomAuteur(nomAuteur));
+		}
+		return res;
+	}
+	
+	@Override
+	public Map<Long, LivreFacade> rechercherParNomDeCategorie(String categorie) throws RemoteException {
+		
+		Map<Long, LivreFacade> res = new HashMap<Long, LivreFacade>();
+		Catalogue catalogue = store.getCatalogue();
+		Set<SousCatalogue> sousCat = catalogue.getSous_cat();
+		for (SousCatalogue sc : sousCat){
+			res.putAll(sc.getLivreByNomSousCat(categorie));
+		}
+		
 		return res;
 	}
 
@@ -200,7 +224,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public AuteurFacade rechercherAuteurParLogin(String login, String pwd)
+	public Auteur rechercherAuteurParLogin(String login, String pwd)
 			throws RemoteException {
 		for (Auteur a : store.getAuteurs()){
 			if (a.getLogin().equals(login) && (a.getMdp().equals(pwd))){
@@ -211,7 +235,7 @@ public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
 	}
 
 	@Override
-	public ClientFacade rechercherClientParLogin(String login, String pwd)
+	public Client rechercherClientParLogin(String login, String pwd)
 			throws RemoteException {
 		for (Client c : store.getClients()){
 			if (c.getLogin().equals(login) && (c.getMdp().equals(pwd))){
