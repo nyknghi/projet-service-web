@@ -44,36 +44,6 @@ public class GesBooksProxy implements gestionnaire.GesBooks {
     return gesBooks;
   }
   
-  public void connecter() throws java.rmi.RemoteException{
-    if (gesBooks == null)
-      _initGesBooksProxy();
-    gesBooks.connecter();
-  }
-  
-  public void viderPanier() throws java.rmi.RemoteException{
-    if (gesBooks == null)
-      _initGesBooksProxy();
-    gesBooks.viderPanier();
-  }
-  
-  public double prixDuLivre(long idLivre) throws java.rmi.RemoteException{
-    if (gesBooks == null)
-      _initGesBooksProxy();
-    return gesBooks.prixDuLivre(idLivre);
-  }
-  
-  public boolean connexion(java.lang.String login, java.lang.String pwd) throws java.rmi.RemoteException{
-    if (gesBooks == null)
-      _initGesBooksProxy();
-    return gesBooks.connexion(login, pwd);
-  }
-  
-  public boolean effectuerPaiement(long idClient) throws java.rmi.RemoteException{
-    if (gesBooks == null)
-      _initGesBooksProxy();
-    return gesBooks.effectuerPaiement(idClient);
-  }
-  
   public java.lang.String getDeviseEncours() throws java.rmi.RemoteException{
     if (gesBooks == null)
       _initGesBooksProxy();
@@ -84,6 +54,18 @@ public class GesBooksProxy implements gestionnaire.GesBooks {
     if (gesBooks == null)
       _initGesBooksProxy();
     gesBooks.setDeviseEncours(deviseEncours);
+  }
+  
+  public void connecter() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.connecter();
+  }
+  
+  public double prixDuLivre(long idLivre) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.prixDuLivre(idLivre);
   }
   
   public boolean estDisponible(long idLivre) throws java.rmi.RemoteException{
@@ -102,6 +84,36 @@ public class GesBooksProxy implements gestionnaire.GesBooks {
     if (gesBooks == null)
       _initGesBooksProxy();
     gesBooks.suppLivreDansPanier(idLivre);
+  }
+  
+  public void viderPanier() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    gesBooks.viderPanier();
+  }
+  
+  public boolean effectuerPaiement(long idClient) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.effectuerPaiement(idClient);
+  }
+  
+  public boolean connexion(java.lang.String login, java.lang.String pwd) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.connexion(login, pwd);
+  }
+  
+  public java.lang.String[] getClientInformation() throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.getClientInformation();
+  }
+  
+  public facade.Books[] getFindsBooks(java.lang.String title, java.lang.String author, java.lang.String categorie) throws java.rmi.RemoteException{
+    if (gesBooks == null)
+      _initGesBooksProxy();
+    return gesBooks.getFindsBooks(title, author, categorie);
   }
   
   

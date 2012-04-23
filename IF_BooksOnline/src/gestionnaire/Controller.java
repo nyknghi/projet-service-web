@@ -1,12 +1,6 @@
 package gestionnaire;
 
 import java.io.IOException;
-import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.util.Properties;
 
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
@@ -16,8 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.rpc.ServiceException;
 
-import facade.AuteurFacade;
-import facade.ClientFacade;
+import facade.Books;
 
 public class Controller extends HttpServlet{
 	InitialContext ctx;
@@ -82,6 +75,9 @@ public class Controller extends HttpServlet{
 		case 0:
 			connexion(request, response);
 			break;
+		case 1:
+			findBooks(request, response);
+			break;
 		default:
 			request.getRequestDispatcher("index.jsp").forward(request,
 					response);
@@ -94,18 +90,38 @@ public class Controller extends HttpServlet{
 		boolean success = false;
 		String login = request.getParameter("login");
 		String pwd = request.getParameter("pwd");
-		
-		System.out.println("On est ici au debut");
+		HttpSession session = request.getSession(true);
 		success = sellingService.connexion(login, pwd);
-		
 		if (!success) {
-			System.out.println("on est ici c mall  malll malll malll passé");
 			request.setAttribute("errorMessage", "Login et/ou mot de passe incorrect");
 		}
-		System.out.println("on est ici c bien bien bien bien  passé");
+		String[] clientinfo = sellingService.getClientInformation();
+		session.setAttribute("clientinfo", clientinfo);
 		request.getRequestDispatcher("index.jsp").forward(request,response);
 	}
 
+	protected void findBooks(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String categorie = request.getParameter("categorie");
+		HttpSession session = request.getSession(true);
+		Books[] LesLivres;
+		if(categorie != null){
+			LesLivres = sellingService.getFindsBooks("", "", categorie);
+		}
+		else{
+			if(title == null) title = "";
+			if(author == null) title = "";
+			LesLivres = sellingService.getFindsBooks(title, author, "");
+		}
+		if(LesLivres == null)
+			session.setAttribute("LesLivres", "Aucun Resultats");
+		else
+			session.setAttribute("LesLivres", LesLivres);
+		request.getRequestDispatcher("findBooks.jsp").forward(request,response);
+	}
+	
 	public void init() throws ServletException {
 
 		this.connecterRMI();

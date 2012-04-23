@@ -19,4 +19,5 @@ public interface LivreFacade extends Remote{
 	public String afficher() throws RemoteException;
 	public AuteurFacade getAuteur() throws RemoteException;
 	public String getDescription() throws RemoteException;
+	
 }

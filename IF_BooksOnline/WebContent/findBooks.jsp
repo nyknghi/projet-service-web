@@ -1,7 +1,17 @@
 <%@ page session="true" language="java" import="java.util.*, facade.*"
 	pageEncoding="ISO-8859-1"%>
 <%
-	Object le_user = session.getAttribute("user");
+	Object cliinf = session.getAttribute("clientinfo");
+	Object livres = session.getAttribute("LesLivres");
+	Books[] LesLivres = new Books[3];
+	String[] clientInfo = new String[3];
+	int size = 0;
+	if(cliinf != null)
+		clientInfo = (String[])cliinf;
+	if(livres != null){
+		LesLivres = (Books[])livres;
+		size = LesLivres.length;
+	}
 	
 %>
 
@@ -20,12 +30,19 @@
           <ul id="navblue">
               <li><a href="findBooks.jsp?categorie='bestsellers'">bestsellers</a></li>
               <li><a href="findBooks.jsp?categorie='magazines'">magazines</a></li>
+              <%if(cliinf != null && clientInfo != null){ 
+              		if(clientInfo[1].toString().equals("AUTEUR")){%>
+              <li><a href="ajouterlivreTemp.jsp">magazines</a></li>
+              <% }} %>
           </ul>
-          <br /><br /><br />
+          <%if(cliinf == null){ %>
+              <br />
+          <% } %>
+          <br /><br />
           <br /><br />
       </div><!-- end menu -->
       <div id="header">
-      <form style="float:right">
+      	<form style="float:right">
       		<select id="devise" onchange="deviseEncours(this.value)">
       			<option value="EUR" >EUR</option>
       			<option value="GBP" >GBP</option>
@@ -34,7 +51,12 @@
       		</select>
       	</form>
           <ul id="navtop">
-              <li><b>Bienvenue Nghi,</b> &nbsp;&nbsp;&nbsp;<a href="logout.jsp"><u>Déconnexion</u></a></li>
+	          <%if(cliinf != null){ %>
+	              <li><b>Bienvenue <%=clientInfo[2] %>,</b> &nbsp;&nbsp;&nbsp;<a href="logout.jsp"><u>Déconnexion</u></a></li>
+                  <li>&nbsp;&nbsp;</li>
+                  <li>&nbsp;&nbsp;</li>
+	          <% } %>
+              
           </ul>
           <a href="passerCommande.jsp?panier='tr'" ><img src="images/panier.jpg" alt="mon panier" /></a>
           <h2><img src="images/title_explore.gif" width="185" height="20" alt="explore your knowledge" /></h2>
@@ -43,10 +65,11 @@
       </div>
       <div class="divider"></div>
       <div id="searchbar">
-          <form action="/" method="get">
-              Title: <input name="title" type="text" value="" class="text" /> &nbsp;
-              Author: <input name="author" type="text" value="" class="text" /> &nbsp;
+          <form action="controller" method="post">
+              Title: <input name="title" type="text" value="" class="text" style="width:100px" /> &nbsp;
+              Author: <input name="author" type="text" value="" class="text" style="width:100px" /> &nbsp;
               <input type="submit" value="Go" class="submit" />
+              <input type="hidden" id="action" name="action" value="1" />
           </form>
       </div><!-- end searchbar -->
       
