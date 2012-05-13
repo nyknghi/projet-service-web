@@ -58,6 +58,8 @@ public class GesBooks {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("Gestionnaire Books connected !");
 	}
 
 	public double prixDuLivre(long idLivre) throws RemoteException{

@@ -22,7 +22,7 @@ public class PaiementServiceServiceLocator extends org.apache.axis.client.Servic
     }
 
     // Use to get a proxy class for PaiementService
-    private java.lang.String PaiementService_address = "http://localhost:8080/BanqueService/services/PaiementService";
+    private java.lang.String PaiementService_address = "http://localhost:8080/IFBooks/services/PaiementService";
 
     public java.lang.String getPaiementServiceAddress() {
         return PaiementService_address;
