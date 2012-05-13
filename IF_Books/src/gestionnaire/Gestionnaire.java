@@ -21,13 +21,14 @@ import facade.CommandeFacade;
 import facade.LivreFacade;
 
 /* Observee */
-public class Gestionnaire extends UnicastRemoteObject implements IGestionnaire{
+public class Gestionnaire implements IGestionnaire{
 	private static final long serialVersionUID = 1L;
 	
 	BookStore store = BookStore.getInstance();
 	
 	public Gestionnaire() throws RemoteException {
 		super();
+		UnicastRemoteObject.exportObject(this, 1100);
 	}
 	
 	@Override

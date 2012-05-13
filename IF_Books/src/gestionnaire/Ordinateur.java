@@ -6,10 +6,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import pojo.BookStore;
 import facade.LivreFacade;
 import facade.SousCatalogueFacade;
-
-import pojo.BookStore;
 
 /* Observer */
 public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
@@ -29,12 +28,12 @@ public class Ordinateur extends UnicastRemoteObject implements IOrdinateur{
 			Util.PATH_USER_DIR=System.getProperty("user.dir");
 			System.setProperty("java.security.policy", Util.PATH_POLICY);
 			System.setProperty("java.rmi.server.codebase", Util.PATH_CODEBASE);
-			
+			System.setProperty("java.rmi.server.hostname", "192.168.1.1");
 			Registry r = LocateRegistry.getRegistry();
 			if (System.getSecurityManager() == null)
 				System.setSecurityManager(new RMISecurityManager());
 			
-			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");
+			IGestionnaire gest = (IGestionnaire) r.lookup("rmi://localhost:1099/GestionnaireServeur");
 			gest.subscribe(this);
 			
 		} catch (Exception e) { 

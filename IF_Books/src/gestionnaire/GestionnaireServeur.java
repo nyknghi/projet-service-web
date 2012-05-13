@@ -21,14 +21,14 @@ public class GestionnaireServeur {
 			System.setProperty("java.security.policy", Util.PATH_POLICY);
 			System.setProperty("java.rmi.server.codebase", Util.PATH_CODEBASE);
 			System.out.println(Util.PATH_CODEBASE);
-		
+			
 			Registry r = LocateRegistry.getRegistry();		
 			
 			if (System.getSecurityManager() == null) 
 				System.setSecurityManager(new RMISecurityManager());
 						
 			gest = new Gestionnaire();
-			r.rebind("rmi://localhost/GestionnaireServeur", gest);			
+			r.rebind("rmi://localhost:1099/GestionnaireServeur", gest);			
 			
 			creerOrdinateur();
 			creerBD();
