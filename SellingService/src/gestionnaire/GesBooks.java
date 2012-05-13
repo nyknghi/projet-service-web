@@ -38,11 +38,11 @@ public class GesBooks {
 	}
 
 	public static void connecter(){
-		System.setProperty("java.rmi.server.codebase", "file:///criounix/share.nfs/users/student/21102208/workspace_helios_ws/IF_Books/src/gestionnaire/");
-		System.setProperty("java.security.policy", "/criounix/share.nfs/users/student/21102208/workspace_helios_ws/IF_Books/src/sec.policy");
+		System.setProperty("java.security.policy", "D:/workspace/IF_Books/src/sec.policy");
+		System.setProperty("java.rmi.server.codebase", "file:///workspace/IF_Books/src/gestionnaire/");
+		
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());
-		//System.setProperty("java.rmi.server.codebase", "file:///criounix/share.nfs/users/student/21102208/workspace_helios_ws/IF_Books/src/gestionnaire/");
 		try {
 			Registry r = LocateRegistry.getRegistry();
 			gest = (IGestionnaire) r.lookup("rmi://localhost/GestionnaireServeur");			

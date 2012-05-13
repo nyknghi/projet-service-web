@@ -14,7 +14,7 @@ public interface IGestionnaire extends Remote{
 	public void ajouterAuteur(long id, String nom) throws RemoteException;
 	public void ajouterSousCatalogue(long idCat, String intitule, long idOrdinateur) throws RemoteException;
 	
-	public void ajouterLivre (long id, String titre, int nbDisponibles, double prix, long idAuteur, long idCatalogue) throws RemoteException;
+	public void ajouterLivre (long id, String titre, int nbDisponibles, double prix, long idAuteur, long idCatalogue, String descripti) throws RemoteException;
 	public void supprimerLivre (long idLivre) throws RemoteException;
 	public LivreFacade rechercherParId(long idLivre) throws RemoteException;
 	public Map<Long,LivreFacade> rechercherParTitre (String titre) throws RemoteException;

@@ -22,7 +22,7 @@ public class ConversionDeviseServiceLocator extends org.apache.axis.client.Servi
     }
 
     // Use to get a proxy class for ConversionDevise
-    private java.lang.String ConversionDevise_address = "http://localhost:8080/BanqueService/services/ConversionDevise";
+    private java.lang.String ConversionDevise_address = "http://localhost:8080/IFBooks/services/ConversionDevise";
 
     public java.lang.String getConversionDeviseAddress() {
         return ConversionDevise_address;

@@ -8,7 +8,8 @@
 package gestionnaire;
 
 public interface PaiementService extends java.rmi.Remote {
-    public boolean isFondsDispo(long idClient, double montant) throws java.rmi.RemoteException;
-    public void effectuerPaiement(long idClient, long idCommande) throws java.rmi.RemoteException;
     public boolean checkCommande(long idClient, long idCommande) throws java.rmi.RemoteException;
+    public void effectuerPaiement(long idClient, long idCommande) throws java.rmi.RemoteException;
+    public void connecter() throws java.rmi.RemoteException;
+    public boolean isFondsDispo(long idClient, double montant) throws java.rmi.RemoteException;
 }
